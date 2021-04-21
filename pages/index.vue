@@ -1,10 +1,9 @@
+<!-- Home page -->
 <template>
   <div class="relative">
     <!-- Header logo -->
     <!-- Main image -->
-    <div class="w-full h-screen mt-10 mb-16 sm:mt-0">
-      <a-portrait-image :img-src="headerLogoImgSrc" class="h-full" />
-    </div>
+    <a-portrait-image :img-src="headerLogoImgSrc" class="w-full h-screen" />
     <!-- Footer -->
   </div>
 </template>
