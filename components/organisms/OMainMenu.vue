@@ -28,7 +28,7 @@ export default Vue.extend({
       menuItems: [
         {
           title: 'Sobre mi',
-          linkTo: ''
+          linkTo: '/sobre-mi'
         },
         {
           title: 'Tienda',
@@ -50,7 +50,7 @@ export default Vue.extend({
         },
         {
           title: 'Contacto',
-          linkTo: ''
+          linkTo: '/contacto'
         }
       ]
     }

@@ -1,7 +1,9 @@
 <!-- Single menu item with subitems if applies -->
 <template>
   <div>
-    {{ menuItem.title }}
+    <nuxt-link :to="menuItem.linkTo">
+      {{ menuItem.title }}
+    </nuxt-link>
     <div
       v-if="typeof menuItem.subitems !== 'undefined'"
       class="md:pt-8 md:absolute md:top-0"

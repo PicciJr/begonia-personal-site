@@ -1,8 +1,8 @@
 <!-- Sub item in menu element -->
 <template>
-  <div>
+  <nuxt-link :to="subitem.linkTo">
     {{ subitem.title }}
-  </div>
+  </nuxt-link>
 </template>
 
 <script lang="ts">
