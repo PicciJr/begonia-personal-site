@@ -1,9 +1,9 @@
 <!-- Home page -->
 <template>
-  <div class="relative">
+  <div>
     <!-- Header logo -->
     <!-- Main image -->
-    <a-portrait-image :img-src="headerLogoImgSrc" class="w-full h-screen" />
+    <a-portrait-image :img-src="headerLogoImgSrc" class="w-full sm:mt-12 portrait-image" />
     <!-- Footer -->
   </div>
 </template>
@@ -25,3 +25,9 @@ export default Vue.extend({
   }
 })
 </script>
+
+<style scoped>
+  .portrait-image {
+    height: 28rem;
+  }
+</style>
