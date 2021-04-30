@@ -1,6 +1,6 @@
 <!-- Contact page with form -->
 <template>
-  <div>
+  <div class="pt-12">
     <o-contact-form />
   </div>
 </template>

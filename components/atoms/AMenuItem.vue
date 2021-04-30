@@ -5,7 +5,7 @@
       {{ menuItem.title }}
     </nuxt-link>
     <div
-      v-if="typeof menuItem.subitems !== 'undefined'"
+      v-if="menuItem !== null"
       class="md:pt-8 md:absolute md:top-0"
     >
       <!-- Subitems -->
