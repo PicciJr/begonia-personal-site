@@ -4,7 +4,6 @@
     <!-- Header logo -->
     <!-- Main image -->
     <a-portrait-image :img-src="headerLogoImgSrc" class="w-full sm:mt-12 portrait-image" />
-    <!-- Footer -->
   </div>
 </template>
 
@@ -16,6 +15,7 @@ export default Vue.extend({
   components: {
     APortraitImage
   },
+  layout: 'default',
   data () {
     const headerLogoImgSrc: string =
       'https://begonia-personal.s3.eu-west-3.amazonaws.com/ilustracion+portada.jpg'

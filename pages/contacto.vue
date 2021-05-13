@@ -1,6 +1,6 @@
 <!-- Contact page with form -->
 <template>
-  <div class="pt-12">
+  <div class="mt-12">
     <o-contact-form />
   </div>
 </template>
@@ -11,6 +11,7 @@ import OContactForm from '~/components/organisms/OContactForm.vue'
 export default Vue.extend({
   components: {
     OContactForm
-  }
+  },
+  layout: 'default'
 })
 </script>

@@ -6,11 +6,11 @@
       <a-burger-menu-icon class="absolute top-0 z-50 w-8 h-8 mt-2 text-gray-500 fill-current md:hidden" />
     </div>
     <!-- Main menu -->
-    <o-main-menu class="relative z-40 sm:pb-12" />
+    <o-main-menu class="absolute w-full h-full sm:relative sm:pb-12" />
     <!-- View content -->
-    <Nuxt class="relative z-30" />
+    <Nuxt class="relative z-20" />
     <!-- Footer -->
-    <o-footer class="absolute bottom-0 flex items-center justify-center w-full max-w-md pb-4" />
+    <o-footer class="flex items-center justify-center w-full max-w-md pb-4" />
   </div>
 </template>
 
