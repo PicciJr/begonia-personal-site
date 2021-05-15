@@ -1,5 +1,5 @@
 <template>
-  <div class="px-4 mt-12 mb-8">
+  <div class="px-4 mt-12 mb-8 text-begonia-sec-gray">
     <!-- Image carousel -->
     <a-carousel :content="product.images" class="mb-4" />
     <!-- Title & price -->
@@ -12,7 +12,7 @@
     <!-- Product options -->
     <m-product-configuration-options :product="product" class="mb-4" />
     <!-- Add to cart -->
-    <a-button cta-text="Añadir al carrito" class="w-full px-4 py-1 text-white" />
+    <a-button cta-text="Añadir al carrito" class="w-full px-4 py-1 bg-begonia-primary-purple" />
   </div>
 </template>
 

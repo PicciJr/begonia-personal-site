@@ -7,7 +7,7 @@
     <m-foldable-menu
       v-show="isMenuOpen"
       :menu-items="menuItems"
-      class="fixed top-0 left-0 z-40 flex flex-col items-center justify-center w-full h-full bg-red-300 opacity-80 md:hidden slide-in-blurred-tl"
+      class="fixed top-0 left-0 z-40 flex flex-col items-center justify-center w-full h-full bg-begonia-primary-purple opacity-80 md:hidden slide-in-blurred-tl"
     />
   </div>
 </template>

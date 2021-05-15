@@ -1,5 +1,5 @@
 <template>
-  <button class="text-xl font-semibold bg-red-300 rounded-lg" @click="$emit('click')">
+  <button class="text-xl font-semibold rounded-lg" @click="$emit('click')">
     {{ ctaText }}
   </button>
 </template>
