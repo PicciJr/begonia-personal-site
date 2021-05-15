@@ -1,7 +1,7 @@
 <template>
   <div class="px-4 mt-12 mb-8 text-begonia-sec-gray">
     <!-- Image carousel -->
-    <a-carousel :content="product.images" class="mb-4" />
+    <a-image-carousel :images="product.images" class="mb-4" :autoplay="3000" :hoverpause="true" />
     <!-- Title & price -->
     <div class="flex flex-col mb-4">
       <h3 class="text-xl font-bold md:text-3xl">
@@ -20,11 +20,11 @@
 import Vue from 'vue'
 import AButton from '@/components/atoms/AButton.vue'
 import MProductConfigurationOptions from '@/components/molecules/MProductConfigurationOptions.vue'
-import ACarousel from '~/components/atoms/AImageCarousel.vue'
+import AImageCarousel from '~/components/atoms/AImageCarousel.vue'
 export default Vue.extend({
   components: {
     AButton,
-    ACarousel,
+    AImageCarousel,
     MProductConfigurationOptions
   },
   layout: 'default',

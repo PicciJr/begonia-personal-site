@@ -1,8 +1,26 @@
 <template>
-  <vue-glide :breakpoints="breakpoints">
-    <vue-glide-slide v-for="image in content" :key="image.id">
+  <vue-glide
+    v-model="activeSlide"
+    :breakpoints="breakpoints"
+    :hoverpause="hoverpause"
+    :autoplay="autoplay"
+  >
+    <vue-glide-slide v-for="image in images" :key="image.id">
       <img :src="image" alt="">
     </vue-glide-slide>
+    <template slot="control">
+      <div class="relative w-full pt-2 text-center">
+        <div class="inline-block px-3 py-1 bg-white rounded-full">
+          <button
+            v-for="(item, index) in images"
+            :key="index"
+            class="w-2 h-2 ml-px mr-1 bg-gray-400 rounded-full"
+            :class="{ 'bg-begonia-primary-orange': index === activeSlide }"
+            @click="productActive = index"
+          />
+        </div>
+      </div>
+    </template>
   </vue-glide>
 </template>
 
@@ -10,7 +28,7 @@
 import Vue from 'vue'
 export default Vue.extend({
   props: {
-    content: {
+    images: {
       type: Array,
       default: null
     },
@@ -23,6 +41,19 @@ export default Vue.extend({
           }
         }
       }
+    },
+    autoplay: {
+      type: [Number, Boolean],
+      default: false
+    },
+    hoverpause: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data () {
+    return {
+      activeSlide: -1
     }
   }
 })
