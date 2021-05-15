@@ -12,20 +12,24 @@
     <!-- Product options -->
     <m-product-configuration-options :product="product" class="mb-4" />
     <!-- Add to cart -->
-    <a-button cta-text="Añadir al carrito" class="w-full px-4 py-1 bg-begonia-primary-purple" />
+    <a-button cta-text="Añadir al carrito" class="w-full px-4 py-1 uppercase bg-begonia-primary-purple" />
+    <!-- Related products -->
+    <o-similar-products class="mt-8" :similar-products="product.similarProducts" />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import AButton from '@/components/atoms/AButton.vue'
+import AImageCarousel from '@/components/atoms/AImageCarousel.vue'
 import MProductConfigurationOptions from '@/components/molecules/MProductConfigurationOptions.vue'
-import AImageCarousel from '~/components/atoms/AImageCarousel.vue'
+import OSimilarProducts from '~/components/organisms/OSimilarProducts.vue'
 export default Vue.extend({
   components: {
     AButton,
     AImageCarousel,
-    MProductConfigurationOptions
+    MProductConfigurationOptions,
+    OSimilarProducts
   },
   layout: 'default',
   data () {
@@ -42,7 +46,8 @@ export default Vue.extend({
         type: string
         sizes?: string[]
         images: string[]
-        hasVariants: boolean
+        hasVariants?: boolean
+        similarProducts?: IProduct[],
     }
 
     const product: IProduct = {
@@ -53,7 +58,21 @@ export default Vue.extend({
       images: ['https://images.unsplash.com/photo-1571115764595-644a1f56a55c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=980&q=80',
         'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=980&q=80',
         'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=980&q=80'],
-      hasVariants: true
+      hasVariants: true,
+      similarProducts: [
+        {
+          title: 'Original 1',
+          price: 100.20,
+          type: 'original',
+          images: ['https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=983&q=80']
+        },
+        {
+          title: 'Original 2',
+          price: 90.60,
+          type: 'original',
+          images: ['https://images.unsplash.com/photo-1579965342575-16428a7c8881?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=999&q=80']
+        }
+      ]
     }
 
     return {
