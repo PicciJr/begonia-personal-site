@@ -15,6 +15,8 @@
     <a-button cta-text="Añadir al carrito" class="w-full px-4 py-1 uppercase bg-begonia-primary-purple" />
     <!-- Related products -->
     <o-similar-products class="mt-8" :similar-products="product.similarProducts" />
+    <!-- Sticky footer Add to cart -->
+    <m-cart-sticky-footer class="w-full h-20" />
   </div>
 </template>
 
@@ -23,12 +25,14 @@ import Vue from 'vue'
 import AButton from '@/components/atoms/AButton.vue'
 import AImageCarousel from '@/components/atoms/AImageCarousel.vue'
 import MProductConfigurationOptions from '@/components/molecules/MProductConfigurationOptions.vue'
+import MCartStickyFooter from '~/components/molecules/MCartStickyFooter.vue'
 import OSimilarProducts from '~/components/organisms/OSimilarProducts.vue'
 export default Vue.extend({
   components: {
     AButton,
     AImageCarousel,
     MProductConfigurationOptions,
+    MCartStickyFooter,
     OSimilarProducts
   },
   layout: 'default',

@@ -1,8 +1,8 @@
 <!-- Spinner field to incremente o decrement amounts by click or touch -->
 <template>
   <div>
-    <span :class="['px-3 py-1 font-bold text-white rounded-full', bgColor]" @click="$emit('decrease-amount')">-</span>
-    <span class="px-4">{{ amount }}</span>
+    <span :class="['px-3 py-1 font-extrabold text-white rounded-full', bgColor]" @click="$emit('decrease-amount')">-</span>
+    <span class="px-2">{{ amount }}</span>
     <span :class="['px-3 py-1 font-bold text-white rounded-full', bgColor]" @click="$emit('increase-amount')">+</span>
   </div>
 </template>
@@ -23,7 +23,7 @@ export default Vue.extend({
   },
   computed: {
     bgColor (): string {
-      return this.color !== null ? this.color : 'bg-purple-700'
+      return this.color !== null ? this.color : 'bg-begonia-primary-gray'
     }
   }
 })
