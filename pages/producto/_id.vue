@@ -45,6 +45,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { IProduct } from '@/types/product/index'
 import AButton from '@/components/atoms/AButton.vue'
 import AImageCarousel from '@/components/atoms/AImageCarousel.vue'
 import MProductConfigurationOptions from '@/components/molecules/MProductConfigurationOptions.vue'
@@ -60,27 +61,6 @@ export default Vue.extend({
   },
   layout: 'default',
   data () {
-    /**
-     * @param title: titulo del producto
-     * @param longDescription: descripcion del producto
-     * @param price: precio del producto
-     * @param type: [lamina, original, etc]
-     * @param sizes: tamaños disponibles, si aplica
-     * @param images: array de imagenes a mostrar en el carrusel de producto
-     * @param hasVariants: saber si un producto es configurable/el usuario puede elegir opciones de tamaño o similar
-     * @param similarProducts: array de productos similares vinculados al producto
-     */
-    interface IProduct {
-      title: string
-      longDescription: string
-      price: number
-      type: string
-      sizes?: string[]
-      images: string[]
-      hasVariants?: boolean
-      similarProducts?: IProduct[]
-    }
-
     const product: IProduct = {
       title: 'Lamina 1',
       longDescription:

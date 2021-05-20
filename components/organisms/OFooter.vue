@@ -12,19 +12,15 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { ISocialMediaLink } from 'types/common/index'
 import ASocialMediaLink from '@/components/atoms/ASocialMediaLink.vue'
-
-interface socialMediaLink {
-  imgSrc: string
-  linkTo: string
-}
 
 export default Vue.extend({
   components: {
     ASocialMediaLink
   },
   data () {
-    const socialMediaItems: socialMediaLink[] = [
+    const socialMediaItems: ISocialMediaLink[] = [
       {
         imgSrc: '/logo-ig.png',
         linkTo: 'https://www.instagram.com/begonia.ilustracion/'
