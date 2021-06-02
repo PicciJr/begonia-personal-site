@@ -1,5 +1,5 @@
 <template>
-  <div class="px-4 mt-12 mb-8 text-begonia-sec-gray">
+  <div class="px-4 mt-16 mb-8 text-begonia-sec-gray">
     <!-- Image carousel -->
     <a-image-carousel
       :images="product.images"
@@ -19,7 +19,8 @@
     <!-- Add to cart -->
     <a-button
       cta-text="Añadir al carrito"
-      class="w-full px-4 py-1 mb-4 uppercase bg-begonia-primary-purple"
+      class="w-full px-4 py-2 mb-4 uppercase bg-begonia-primary-purple"
+      @click="addToCart"
     />
     <!-- Product description -->
     <div class="mb-16">
@@ -39,13 +40,14 @@
       :similar-products="product.similarProducts"
     />
     <!-- Sticky footer Add to cart -->
-    <m-cart-sticky-footer class="w-full h-20" />
+    <m-cart-sticky-footer class="w-full h-20" :product="product" />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { IProduct } from '@/types/product/index'
+import { cartStore } from '@/store'
 import AButton from '@/components/atoms/AButton.vue'
 import AImageCarousel from '@/components/atoms/AImageCarousel.vue'
 import MProductConfigurationOptions from '@/components/molecules/MProductConfigurationOptions.vue'
@@ -112,6 +114,9 @@ export default Vue.extend({
   methods: {
     toggleLongDescriptionVisibility () {
       this.isLongDescriptionVisible = !this.isLongDescriptionVisible
+    },
+    addToCart () {
+      cartStore.addCartItem(this.product)
     }
   }
 })

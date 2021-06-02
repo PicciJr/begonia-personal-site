@@ -6,7 +6,7 @@
     :autoplay="autoplay"
   >
     <vue-glide-slide v-for="image in images" :key="image.id">
-      <img :src="image" alt="">
+      <img :src="image" alt="" class="rounded-lg">
     </vue-glide-slide>
     <template slot="control">
       <div class="relative w-full pt-2 text-center">

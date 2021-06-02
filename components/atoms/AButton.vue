@@ -1,6 +1,7 @@
 <template>
   <button class="text-xl font-semibold rounded-lg" @click="$emit('click')">
     {{ ctaText }}
+    <slot />
   </button>
 </template>
 

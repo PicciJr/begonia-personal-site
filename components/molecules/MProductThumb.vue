@@ -5,7 +5,7 @@
       {{ product.title }}
     </h3>
     <span class="mb-2 text-xs">{{ product.price }} €</span>
-    <span class="px-4 py-1 text-sm font-bold uppercase rounded-full text-begonia-sec-gray bg-begonia-primary-purple">Añadir a carrito</span>
+    <span class="px-2 py-1 text-sm font-bold uppercase rounded-full text-begonia-sec-gray bg-begonia-primary-purple">Añadir al carrito</span>
   </div>
 </template>
 
