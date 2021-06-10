@@ -1,4 +1,6 @@
 <!-- Mobile component for sticky footer add to cart action -->
+<!-- TODO: hacer que el componente sea más genérico para que se pueda
+usar en otros contextos como el checkout-->
 <template>
   <div
     class="fixed bottom-0 left-0 flex items-center justify-between px-4 bg-white rounded-tl-2xl rounded-tr-2xl md:hidden sticky-footer-shadow"
