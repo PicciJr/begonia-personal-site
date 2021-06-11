@@ -6,7 +6,7 @@
       <a-burger-menu-icon class="fixed top-0 z-50 w-10 h-10 p-2 mt-2 text-gray-500 rounded-full fill-current bg-begonia-primary-gray md:hidden" />
     </div>
     <!-- Mini cart icon -->
-    <a-mini-cart-icon class="fixed top-0 z-50 w-10 h-10 p-2 mt-2 rounded-lg fill-current text-begonia-sec-gray right-5 bg-begonia-primary-purple md:hidden" />
+    <a-mini-cart-icon class="fixed top-0 z-50 mt-2 right-5 md:hidden" />
     <!-- Main menu -->
     <o-main-menu class="absolute w-full h-full sm:relative sm:pb-12" />
     <!-- View content -->
