@@ -11,7 +11,7 @@
     <!-- Order summary / Costs -->
     <a-cart-summary class="mb-8" />
     <!-- CTA / TODO: cambiarlo por un sticky footer cuando haga el sticky footer generico -->
-    <a-button cta-text="Siguiente paso" class="w-full px-4 py-2 mb-4 text-xl font-bold text-begonia-sec-gray bg-begonia-primary-purple" />
+    <a-button cta-text="Siguiente paso" class="w-full px-4 py-2 mb-4 text-xl font-bold text-begonia-sec-gray bg-begonia-primary-purple" @click="handleNextStep" />
   </div>
 </template>
 
@@ -101,6 +101,11 @@ export default Vue.extend({
           ]
         }
       ]
+    }
+  },
+  methods: {
+    handleNextStep () {
+      this.$router.push('/checkout/pago')
     }
   }
 })

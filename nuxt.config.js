@@ -10,16 +10,20 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    script: [
+      {
+        src: `https://www.paypal.com/sdk/js?client-id=${process.env.PAYPAL_CLIENT_ID}`,
+        body: true
+      }
+    ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    '~/plugins/vue-glide.js'
-  ],
+  plugins: ['~/plugins/vue-glide.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
