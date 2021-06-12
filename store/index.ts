@@ -2,6 +2,12 @@
 import { Store } from 'vuex'
 import { initialiseStores } from '~/utils/store-accessor'
 
+export const actions = {
+  nuxtServerInit ({ commit }, { app }) {
+    app.$apiConnection.get('/cart').then(res => console.log(res.data))
+  }
+}
+
 const initializer = (store: Store<any>) => initialiseStores(store)
 
 export const plugins = [initializer]
