@@ -1,6 +1,12 @@
 import { IProduct } from 'types/product/index'
 import { IAddress } from 'types/address/index'
 
+export enum CartStatus {
+  InProgress = 'NEW',
+  Addressed = 'ADDRESSED',
+  Completed = 'COMPLETED',
+}
+
 /**
  * items: items del carrito
  * subtotal: subtotal actual del carrito
@@ -8,8 +14,9 @@ import { IAddress } from 'types/address/index'
  * email: email del comprador
  */
 export interface ICart {
-    items: IProduct[]
-    subtotal: number
-    shippingAddress?: IAddress
-    email?: string
+  items: IProduct[]
+  subtotal: number
+  status: CartStatus
+  shippingAddress?: IAddress
+  email?: string
 }

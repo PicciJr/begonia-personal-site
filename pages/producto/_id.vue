@@ -31,7 +31,10 @@
         {{ product.longDescription }}
       </div>
       <div class="flex justify-center">
-        <span class="px-4 py-1 text-sm font-bold text-white rounded-full w-max bg-begonia-sec-gray" @click="toggleLongDescriptionVisibility">{{ longDescriptionBadgeText }}</span>
+        <span
+          class="px-4 py-1 text-sm font-bold text-white rounded-full w-max bg-begonia-sec-gray"
+          @click="toggleLongDescriptionVisibility"
+        >{{ longDescriptionBadgeText }}</span>
       </div>
     </div>
     <!-- Related products -->
@@ -46,7 +49,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { IProduct } from '@/types/product/index'
+import { ICart, CartStatus } from '@/types/cart/index'
 import { cartStore } from '@/store'
 import AButton from '@/components/atoms/AButton.vue'
 import AImageCarousel from '@/components/atoms/AImageCarousel.vue'
@@ -62,44 +65,15 @@ export default Vue.extend({
     OSimilarProducts
   },
   layout: 'default',
-  data () {
-    const product: IProduct = {
-      title: 'Lamina 1',
-      longDescription:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      price: 10.5,
-      type: 'lamina',
-      sizes: ['A4', 'A2', 'A3'],
-      images: [
-        'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=980&q=80',
-        'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=980&q=80',
-        'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=980&q=80'
-      ],
-      hasVariants: true,
-      similarProducts: [
-        {
-          title: 'Original 1',
-          longDescription: '',
-          price: 100.2,
-          type: 'original',
-          images: [
-            'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=983&q=80'
-          ]
-        },
-        {
-          title: 'Original 2',
-          longDescription: '',
-          price: 90.6,
-          type: 'original',
-          images: [
-            'https://images.unsplash.com/photo-1579965342575-16428a7c8881?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=999&q=80'
-          ]
-        }
-      ]
-    }
-
+  async asyncData ({ app }) {
+    const response = await app.$apiConnection.get('/product/1')
+    const product = response.data
     return {
-      product,
+      product
+    }
+  },
+  data () {
+    return {
       isLongDescriptionVisible: false
     }
   },
@@ -116,7 +90,12 @@ export default Vue.extend({
       this.isLongDescriptionVisible = !this.isLongDescriptionVisible
     },
     addToCart () {
-      cartStore.addCartItem(this.product)
+      const newCart: ICart = {
+        items: [this.product],
+        subtotal: this.product.price,
+        status: CartStatus.InProgress
+      }
+      cartStore.createCart(newCart)
     }
   }
 })

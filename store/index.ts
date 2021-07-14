@@ -3,8 +3,8 @@ import { Store } from 'vuex'
 import { initialiseStores } from '~/utils/store-accessor'
 
 export const actions = {
-  nuxtServerInit ({ commit }, { app }) {
-    app.$apiConnection.get('/cart').then(res => console.log(res.data))
+  async nuxtServerInit ({ commit }, { app }) {
+    // TODO
   }
 }
 

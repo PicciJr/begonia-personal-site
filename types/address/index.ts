@@ -8,6 +8,6 @@
 export interface IAddress {
     street: string
     province: string
-    postalCode: number
+    postalCode: string
     phoneNumber: string
 }

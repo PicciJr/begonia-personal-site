@@ -9,6 +9,7 @@
  * similarProducts: array de productos similares vinculados al producto
  */
 export interface IProduct {
+  id: number
   title: string
   longDescription: string
   price: number
