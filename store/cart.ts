@@ -1,6 +1,6 @@
 import { Module, VuexModule, Action, Mutation } from 'vuex-module-decorators'
 import { IProduct } from '~/types/product'
-import { CartStatus, ICart } from '~/types/cart'
+import { ICart } from '~/types/cart'
 
 @Module({
   name: 'cart',
@@ -32,25 +32,45 @@ export default class Cart extends VuexModule {
   }
 
   @Mutation
-  UPDATE_CART_ITEM (item: IProduct, quantity: number) {
-    // TODO
+  UPDATE_CART_ITEM (updatedCart: ICart) {
+    this.cart = updatedCart
+  }
+
+  @Mutation
+  REMOVE_CART_ITEM (updatedCart: ICart) {
+    this.cart = updatedCart
   }
 
   @Action
-  async createCart (cart) {
+  async createCart ({ productId, quantity }) {
     try {
-      // debugger
-      await this.store.$apiConnection.post('cart', cart)
+      const newCart = await this.store.$apiConnection.post('cart', {
+        productId,
+        quantity
+      })
+      this.CREATE_CART(newCart.data)
     } catch (err) {}
   }
 
   @Action
-  addCartItem (item: IProduct) {
-    this.ADD_CART_ITEM(item)
+  addCartItem (product: IProduct) {
+    // TODO: integracion API
+    this.ADD_CART_ITEM(product)
   }
 
   @Action
-  updateCartItem (item: IProduct, quantity: number) {
-    // TODO
+  async updateCartItem ({ product, quantity }) {
+    try {
+      const updatedCart = await this.store.$apiConnection.put(
+        `cart/${this.cart.token}/${product.id}`,
+        { quantity }
+      )
+      this.UPDATE_CART_ITEM(updatedCart.data)
+    } catch (err) {}
+  }
+
+  @Action
+  removeCartItem (product: IProduct) {
+    // TODO: integracion API
   }
 }

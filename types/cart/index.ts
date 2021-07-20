@@ -19,4 +19,5 @@ export interface ICart {
   status: CartStatus
   shippingAddress?: IAddress
   email?: string
+  token?: string
 }

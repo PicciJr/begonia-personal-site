@@ -15,10 +15,16 @@
       <span class="text-lg font-medium md:text-xl">{{ product.price }} €</span>
     </div>
     <!-- Product options -->
-    <m-product-configuration-options :product="product" class="mb-4" />
+    <m-product-configuration-options
+      :product="product"
+      :amount="amount"
+      class="mb-4"
+      @decrease-amount="handleDecreaseAmount"
+      @increase-amount="increaseProductAmount"
+    />
     <!-- Add to cart -->
     <a-button
-      cta-text="Añadir al carrito"
+      :cta-text="ctaButtonText"
       class="w-full px-4 py-2 mb-4 uppercase bg-begonia-primary-purple"
       @click="addToCart"
     />
@@ -49,7 +55,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { ICart, CartStatus } from '@/types/cart/index'
+import { mapState } from 'vuex'
 import { cartStore } from '@/store'
 import AButton from '@/components/atoms/AButton.vue'
 import AImageCarousel from '@/components/atoms/AImageCarousel.vue'
@@ -69,7 +75,8 @@ export default Vue.extend({
     const response = await app.$apiConnection.get('/product/1')
     const product = response.data
     return {
-      product
+      product,
+      amount: typeof product.amount !== 'undefined' ? product.amount : 1
     }
   },
   data () {
@@ -78,11 +85,22 @@ export default Vue.extend({
     }
   },
   computed: {
+    ...mapState({
+      cart: state => cartStore.cart
+    }),
     longDescriptionHeight (): string {
       return this.isLongDescriptionVisible ? 'h-full' : 'h-20'
     },
     longDescriptionBadgeText (): string {
       return this.isLongDescriptionVisible ? 'Leer menos' : 'Leer más'
+    },
+    isProductInCartAlready () {
+      return this.cart?.items?.find(product => product.id === this.product.id)
+    },
+    ctaButtonText () {
+      return this.isProductInCartAlready
+        ? 'Producto ya asignado'
+        : 'Añadir al carrito'
     }
   },
   methods: {
@@ -90,12 +108,34 @@ export default Vue.extend({
       this.isLongDescriptionVisible = !this.isLongDescriptionVisible
     },
     addToCart () {
-      const newCart: ICart = {
-        items: [this.product],
-        subtotal: this.product.price,
-        status: CartStatus.InProgress
+      cartStore.createCart({
+        productId: this.product.id,
+        quantity: this.amount
+      })
+    },
+    handleDecreaseAmount () {
+      const newAmount = this.amount - 1
+      if (newAmount >= 1) {
+        this.decreaseProductAmount()
       }
-      cartStore.createCart(newCart)
+    },
+    async decreaseProductAmount () {
+      this.amount--
+      if (this.isProductInCartAlready) {
+        await cartStore.updateCartItem({
+          product: this.product,
+          quantity: this.amount
+        })
+      }
+    },
+    async increaseProductAmount () {
+      this.amount++
+      if (this.isProductInCartAlready) {
+        await cartStore.updateCartItem({
+          product: this.product,
+          quantity: this.amount
+        })
+      }
     }
   }
 })

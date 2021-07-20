@@ -3,12 +3,19 @@
   <div>
     <!-- Type lamina -->
     <div v-if="product.hasVariants">
-      <a-dropdown-field class="w-full h-10 px-4 mb-4" :options="product.sizes" />
+      <a-dropdown-field
+        class="w-full h-10 px-4 mb-4"
+        :options="product.sizes"
+      />
     </div>
     <!-- Amounts -->
     <div class="mt-6">
       <span class="block mb-2">Cantidad</span>
-      <a-spinner-field />
+      <a-spinner-field
+        :amount="amount"
+        @decrease-amount="$emit('decrease-amount')"
+        @increase-amount="$emit('increase-amount')"
+      />
     </div>
   </div>
 </template>
@@ -26,6 +33,10 @@ export default Vue.extend({
     product: {
       type: Object,
       default: null
+    },
+    amount: {
+      type: Number,
+      default: 1
     }
   }
 })
