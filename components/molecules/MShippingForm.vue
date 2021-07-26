@@ -3,7 +3,7 @@
     <p class="mb-4 text-xl">
       Tus datos de envío
     </p>
-    <form class="flex flex-col md:flex-row">
+    <form class="flex flex-col">
       <a-input-text-field placeholder="Dirección de entrega: calle, número" class="mb-4" />
       <a-input-text-field placeholder="Provincia" class="mb-4" />
       <a-input-text-field placeholder="Código Postal" class="mb-4" maxlength="5" />

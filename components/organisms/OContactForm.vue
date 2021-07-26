@@ -1,8 +1,8 @@
 <template>
-  <div class="px-4">
+  <form class="px-4">
     <a-input-text-field class="w-full h-10 px-4 mb-4" placeholder="Email" />
     <a-input-text-field type="checkbox" class="text-green-400 rounded" />
-  </div>
+  </form>
 </template>
 
 <script lang="ts">

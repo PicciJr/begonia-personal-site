@@ -16,7 +16,6 @@ usar en otros contextos como el checkout-->
 
 <script lang="ts">
 import Vue from 'vue'
-import { cartStore } from '@/store'
 import AButton from '@/components/atoms/AButton.vue'
 import ASpinnerField from '@/components/atoms/ASpinnerField.vue'
 
@@ -33,7 +32,7 @@ export default Vue.extend({
   },
   methods: {
     addToCart () {
-      cartStore.addCartItem(this.product)
+      // TODO
     }
   }
 })

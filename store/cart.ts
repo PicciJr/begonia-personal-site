@@ -8,9 +8,6 @@ import { ICart } from '~/types/cart'
   namespaced: true
 })
 
-// TODO: habrá que cambiar la mayoría de operaciones para que realmente no hagan los cambios
-// si no que simplemente copien el valor de carrito que llega de back, en cada operación
-// (crear carrito, añadir, restar unidad, sumar unidad, borrar, etc)
 export default class Cart extends VuexModule {
   cart: ICart = {
     items: [],
@@ -21,14 +18,18 @@ export default class Cart extends VuexModule {
   }
 
   @Mutation
-  CREATE_CART (cart: ICart) {
+  SET_CART (cart: ICart) {
     this.cart = cart
+  }
+
+  @Mutation
+  SET_CART_TOKEN (token) {
+    this.cart.token = token
   }
 
   @Mutation
   ADD_CART_ITEM (item: IProduct) {
     // TODO
-    this.cart.items.push(item)
   }
 
   @Mutation
@@ -48,8 +49,26 @@ export default class Cart extends VuexModule {
         productId,
         quantity
       })
-      this.CREATE_CART(newCart.data)
+      this.SET_CART(newCart.data)
+      this.SET_CART_TOKEN(newCart.data.token)
+      this.store.$cookies.set('cartToken', newCart.data.token, {
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7
+      })
     } catch (err) {}
+  }
+
+  @Action
+  setCartToken (token) {
+    this.SET_CART_TOKEN(token)
+  }
+
+  @Action
+  async getCart () {
+    const response = await this.store.$apiConnection.get(
+      `cart/${this.cart.token}`
+    )
+    this.SET_CART(response.data)
   }
 
   @Action
@@ -70,7 +89,19 @@ export default class Cart extends VuexModule {
   }
 
   @Action
-  removeCartItem (product: IProduct) {
-    // TODO: integracion API
+  async removeCartItem (product) {
+    try {
+      const response = await this.store.$apiConnection.delete(
+        `cart/${this.cart.token}/${product.id}`
+      )
+      this.REMOVE_CART_ITEM(response.data)
+      return response.data
+    } catch (err) {}
+  }
+
+  get cartItemsTotalAmount () {
+    return this.cart.items.reduce((acc, item) => {
+      return acc + item.amount
+    }, 0)
   }
 }

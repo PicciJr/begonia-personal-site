@@ -71,13 +71,15 @@ export default Vue.extend({
     OSimilarProducts
   },
   layout: 'default',
-  async asyncData ({ app }) {
-    const response = await app.$apiConnection.get('/product/1')
-    const product = response.data
-    return {
-      product,
-      amount: typeof product.amount !== 'undefined' ? product.amount : 1
-    }
+  async asyncData ({ app, route }) {
+    try {
+      const productId = route.params.id
+      const response = await app.$apiConnection.get(`/product/${productId}`)
+      const product = response.data
+      return {
+        product
+      }
+    } catch (err) {}
   },
   data () {
     return {
@@ -88,6 +90,12 @@ export default Vue.extend({
     ...mapState({
       cart: state => cartStore.cart
     }),
+    amount () {
+      const productInStore = this.cart.items.find(
+        item => item.id === this.product.id
+      )
+      return typeof productInStore !== 'undefined' ? productInStore.amount : 1
+    },
     longDescriptionHeight (): string {
       return this.isLongDescriptionVisible ? 'h-full' : 'h-20'
     },
@@ -110,30 +118,22 @@ export default Vue.extend({
     addToCart () {
       cartStore.createCart({
         productId: this.product.id,
-        quantity: this.amount
+        quantity: 1
       })
     },
-    handleDecreaseAmount () {
-      const newAmount = this.amount - 1
-      if (newAmount >= 1) {
-        this.decreaseProductAmount()
-      }
-    },
-    async decreaseProductAmount () {
-      this.amount--
+    async handleDecreaseAmount () {
       if (this.isProductInCartAlready) {
         await cartStore.updateCartItem({
           product: this.product,
-          quantity: this.amount
+          quantity: this.amount - 1
         })
       }
     },
     async increaseProductAmount () {
-      this.amount++
       if (this.isProductInCartAlready) {
         await cartStore.updateCartItem({
           product: this.product,
-          quantity: this.amount
+          quantity: this.amount + 1
         })
       }
     }

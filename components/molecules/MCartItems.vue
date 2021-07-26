@@ -1,6 +1,13 @@
 <template>
   <div>
-    <a-cart-item v-for="product in items" :key="product.id" :product="product" class="mb-4" />
+    <a-cart-item
+      v-for="product in items"
+      :key="product.id"
+      :product="product"
+      :amount="product.amount"
+      class="mb-4"
+      @remove-product="removeProduct"
+    />
   </div>
 </template>
 
@@ -16,6 +23,11 @@ export default Vue.extend({
     items: {
       type: Array as () => IProduct[],
       default: null
+    }
+  },
+  methods: {
+    removeProduct (product) {
+      this.$emit('remove-product', product)
     }
   }
 })
