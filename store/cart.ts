@@ -7,7 +7,6 @@ import { ICart } from '~/types/cart'
   stateFactory: true,
   namespaced: true
 })
-
 export default class Cart extends VuexModule {
   cart: ICart = {
     items: [],
@@ -40,6 +39,17 @@ export default class Cart extends VuexModule {
   @Mutation
   REMOVE_CART_ITEM (updatedCart: ICart) {
     this.cart = updatedCart
+  }
+
+  @Mutation
+  RESET_CART () {
+    this.cart = {
+      items: [],
+      subtotal: 0.0,
+      status: null,
+      email: '',
+      shippingAddress: null
+    }
   }
 
   @Action
@@ -95,6 +105,18 @@ export default class Cart extends VuexModule {
         `cart/${this.cart.token}/${product.id}`
       )
       this.REMOVE_CART_ITEM(response.data)
+      return response.data
+    } catch (err) {}
+  }
+
+  @Action
+  async completeOrder () {
+    try {
+      const response = await this.store.$apiConnection.put(
+        `cart/checkout/complete/${this.cart.token}`
+      )
+      this.RESET_CART()
+      this.store.$cookies.remove('cartToken')
       return response.data
     } catch (err) {}
   }

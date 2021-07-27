@@ -23,13 +23,20 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { ICart } from '~/types/cart/index'
+import { mapState } from 'vuex'
+import { cartStore } from '@/store'
+
 export default Vue.extend({
-  props: {
-    cart: {
-      type: Object as () => ICart,
-      default: null
-    }
+  computed: {
+    ...mapState({
+      cart: state => cartStore.cart
+    })
   }
+  // props: {
+  //   cart: {
+  //     type: Object as () => ICart,
+  //     default: null
+  //   }
+  // }
 })
 </script>
