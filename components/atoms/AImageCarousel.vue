@@ -58,7 +58,6 @@ export default Vue.extend({
   },
   computed: {
     imgResolver (): string {
-      // TODO: pedirselo a API, no a Strapi directamente
       return `${process.env.STRAPI_BASE_URL}${this.images[0].url}`
     }
   }
