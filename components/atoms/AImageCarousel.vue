@@ -5,14 +5,14 @@
     :hoverpause="hoverpause"
     :autoplay="autoplay"
   >
-    <vue-glide-slide v-for="image in images" :key="image.id">
-      <img :src="imgResolver" alt="" class="rounded-lg">
+    <vue-glide-slide v-for="image in product.images" :key="image.id">
+      <img :src="image.formats.medium.url" alt="" class="rounded-lg">
     </vue-glide-slide>
     <template slot="control">
       <div class="relative w-full pt-2 text-center">
         <div class="inline-block px-3 py-1 bg-white rounded-full">
           <button
-            v-for="(item, index) in images"
+            v-for="(item, index) in product.images"
             :key="index"
             class="w-2 h-2 ml-px mr-1 bg-gray-400 rounded-full"
             :class="{ 'bg-begonia-primary-orange': index === activeSlide }"
@@ -28,8 +28,8 @@
 import Vue from 'vue'
 export default Vue.extend({
   props: {
-    images: {
-      type: Array,
+    product: {
+      type: Object,
       default: null
     },
     breakpoints: {
@@ -54,11 +54,6 @@ export default Vue.extend({
   data () {
     return {
       activeSlide: -1
-    }
-  },
-  computed: {
-    imgResolver (): string {
-      return `${process.env.STRAPI_BASE_URL}${this.images[0].url}`
     }
   }
 })

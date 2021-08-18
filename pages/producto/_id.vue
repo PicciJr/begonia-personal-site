@@ -3,6 +3,7 @@
     <!-- Image carousel -->
     <a-image-carousel
       :images="product.images"
+      :product="product"
       class="mb-4"
       :autoplay="3000"
       :hoverpause="true"
