@@ -28,7 +28,7 @@
       "@types/node",
       "@nuxtjs/axios"
     ],
-    "noImplicitAny": false, // para que no muestre todo el rato el warning de si no indico un type
+    "noImplicitAny": false,
   },
   "exclude": [
     "node_modules",
