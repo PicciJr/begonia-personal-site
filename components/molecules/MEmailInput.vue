@@ -1,0 +1,53 @@
+<template>
+  <div>
+    <a-input-text-field
+      placeholder="Correo electrónico"
+      :class="['w-full mb-2', { 'border-red-400 ring-red-400 ring-1 bg-red-100 bg-opacity-60' : errorMessage !== null }]"
+      type="email"
+      @change="validateEmail"
+    />
+    <!-- Error label -->
+    <p v-show="errorMessage" class="text-xs font-medium text-red-400">
+      {{ errorMessage }}
+    </p>
+  </div>
+</template>
+
+<script>
+import AInputTextField from '~/components/atoms/AInputTextField.vue'
+
+export default {
+  components: {
+    AInputTextField
+  },
+  data () {
+    return {
+      errorMessage: null
+    }
+  },
+  methods: {
+    validateEmail (event) {
+      if (
+        this.isValidLength(event.target.value) &&
+        this.isValidPattern(event.target.value)
+      ) {
+        this.$emit('valid-email')
+        this.errorMessage = null
+      } else {
+        this.$emit('invalid-email')
+        this.errorMessage = 'Por favor, introduzca un email válido.'
+      }
+    },
+    isValidLength (email) {
+      return email.length > 5
+    },
+    isValidPattern (email) {
+      return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+        email
+      )
+    }
+  }
+}
+</script>
+
+<style></style>

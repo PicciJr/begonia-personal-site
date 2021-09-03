@@ -2,6 +2,7 @@
 <template>
   <input
     class="h-12 px-4 text-sm text-gray-500 border border-gray-300 rounded-lg focus:outline-none focus:border-gray-600"
+    @change="$emit('change', $event)"
   >
 </template>
 
