@@ -1,7 +1,8 @@
 <!-- Dropdown box for selecting a single option -->
 <template>
   <select
-    class="text-sm text-gray-500 border border-gray-300 rounded-lg focus:outline-none focus:border-gray-600"
+    class="h-12 text-sm text-gray-500 border border-gray-300 rounded-lg focus:outline-none focus:border-gray-600"
+    @change="$emit('change', $event)"
   >
     <option v-for="option in options" :key="option.id" :value="option">
       {{ option }}

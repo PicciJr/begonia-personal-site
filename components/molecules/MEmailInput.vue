@@ -2,7 +2,7 @@
   <div>
     <a-input-text-field
       placeholder="Correo electrónico"
-      :class="['w-full mb-2', { 'border-red-400 ring-red-400 ring-1 bg-red-100 bg-opacity-60' : errorMessage !== null }]"
+      :class="['w-full', { 'border-red-400 ring-red-400 ring-1 bg-red-100 bg-opacity-60' : errorMessage !== null }]"
       type="email"
       @change="validateEmail"
     />
