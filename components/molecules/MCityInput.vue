@@ -1,7 +1,6 @@
 <template>
   <div>
     <a-dropdown-field
-      placeholder="Provincia"
       :options="allowedCities"
       :class="[
         'w-full',
@@ -20,6 +19,7 @@
 </template>
 
 <script>
+import { cartStore } from '@/store'
 import ADropdownField from '~/components/atoms/ADropdownField.vue'
 
 export default {
@@ -39,6 +39,7 @@ export default {
   },
   methods: {
     validateCity (event) {
+      cartStore.updateProvince(event.target.value)
       if (this.isValidCitySelected(event.target.value)) {
         this.$emit('valid-city')
         this.errorMessage = null

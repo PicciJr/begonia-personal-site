@@ -1,5 +1,4 @@
 import { IProduct } from 'types/product/index'
-import { IAddress } from 'types/address/index'
 
 export enum CartStatus {
   InProgress = 'NEW',
@@ -17,7 +16,5 @@ export interface ICart {
   items: IProduct[]
   subtotal: number
   status: CartStatus
-  shippingAddress?: IAddress
-  email?: string
   token?: string
 }

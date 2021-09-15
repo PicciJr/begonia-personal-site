@@ -11,15 +11,15 @@
       @remove-product="handleRemoveProduct"
     />
     <!-- Shipping data / Form -->
-    <m-shipping-form class="mb-8" />
+    <o-shipping-form
+      class="mb-8"
+      @valid-form="handleValidForm"
+      @invalid-form="handleInvalidForm"
+    />
     <!-- Order summary / Costs -->
     <a-cart-summary :cart="cart" class="mb-8" />
     <!-- CTA / TODO: cambiarlo por un sticky footer cuando haga el sticky footer generico -->
-    <a-button
-      cta-text="Siguiente paso"
-      class="w-full px-4 py-2 mb-4 text-xl font-bold text-begonia-sec-gray bg-begonia-primary-purple"
-      @click="handleNextStep"
-    />
+    <m-checkout-next-step-button :is-enabled="isValidForm" button-text="Siguiente paso" />
   </div>
 </template>
 
@@ -28,17 +28,22 @@ import Vue from 'vue'
 import { cartStore } from '@/store'
 import { mapState } from 'vuex'
 import ACartSummary from '@/components/atoms/ACartSummary.vue'
-import AButton from '@/components/atoms/AButton.vue'
 import MCartItems from '@/components/molecules/MCartItems.vue'
-import MShippingForm from '@/components/molecules/MShippingForm.vue'
+import OShippingForm from '~/components/organisms/OShippingForm.vue'
+import MCheckoutNextStepButton from '~/components/molecules/MCheckoutNextStepButton.vue'
 export default Vue.extend({
   components: {
     ACartSummary,
-    AButton,
     MCartItems,
-    MShippingForm
+    OShippingForm,
+    MCheckoutNextStepButton
   },
   layout: 'checkout',
+  data () {
+    return {
+      isValidForm: false
+    }
+  },
   computed: {
     ...mapState({
       cart: state => cartStore.cart
@@ -53,6 +58,12 @@ export default Vue.extend({
     },
     async handleRemoveProduct (product) {
       // TODO: usar store
+    },
+    handleValidForm () {
+      this.isValidForm = true
+    },
+    handleInvalidForm () {
+      this.isValidForm = false
     }
   }
 })

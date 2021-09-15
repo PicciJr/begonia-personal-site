@@ -10,4 +10,5 @@ export interface IAddress {
     province: string
     postalCode: string
     phoneNumber: string
+    email: string
 }

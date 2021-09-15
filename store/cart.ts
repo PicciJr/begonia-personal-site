@@ -1,6 +1,7 @@
 import { Module, VuexModule, Action, Mutation } from 'vuex-module-decorators'
 import { IProduct } from '~/types/product'
 import { ICart } from '~/types/cart'
+import { IAddress } from '~/types/address'
 
 @Module({
   name: 'cart',
@@ -11,9 +12,16 @@ export default class Cart extends VuexModule {
   cart: ICart = {
     items: [],
     subtotal: 0.0,
-    status: null,
+    status: null
+    // email: '',
+  }
+
+  shippingAddress: IAddress = {
     email: '',
-    shippingAddress: null
+    phoneNumber: '',
+    postalCode: '',
+    province: '',
+    street: ''
   }
 
   @Mutation
@@ -47,9 +55,34 @@ export default class Cart extends VuexModule {
       items: [],
       subtotal: 0.0,
       status: null,
-      email: '',
-      shippingAddress: null
+      email: ''
+      // shippingAddress: null
     }
+  }
+
+  @Mutation
+  UPDATE_EMAIL (email) {
+    this.shippingAddress.email = email
+  }
+
+  @Mutation
+  UPDATE_STREET (street) {
+    this.shippingAddress.street = street
+  }
+
+  @Mutation
+  UPDATE_PROVINCE (province) {
+    this.shippingAddress.province = province
+  }
+
+  @Mutation
+  UPDATE_POSTALCODE (postalCode) {
+    this.shippingAddress.postalCode = postalCode
+  }
+
+  @Mutation
+  UPDATE_PHONENUMBER (phoneNumber) {
+    this.shippingAddress.phoneNumber = phoneNumber
   }
 
   @Action
@@ -119,6 +152,31 @@ export default class Cart extends VuexModule {
       this.store.$cookies.remove('cartToken')
       return response.data
     } catch (err) {}
+  }
+
+  @Action
+  updateEmail (email) {
+    this.UPDATE_EMAIL(email)
+  }
+
+  @Action
+  updateStreet (street) {
+    this.UPDATE_STREET(street)
+  }
+
+  @Action
+  updateProvince (province) {
+    this.UPDATE_PROVINCE(province)
+  }
+
+  @Action
+  updatePostalCode (postalCode) {
+    this.UPDATE_POSTALCODE(postalCode)
+  }
+
+  @Action
+  updatePhoneNumber (phoneNumber) {
+    this.UPDATE_PHONENUMBER(phoneNumber)
   }
 
   get cartItemsTotalAmount () {

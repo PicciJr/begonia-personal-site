@@ -2,7 +2,13 @@
   <div>
     <a-input-text-field
       placeholder="Correo electrónico"
-      :class="['w-full', { 'border-red-400 ring-red-400 ring-1 bg-red-100 bg-opacity-60' : errorMessage !== null }]"
+      :class="[
+        'w-full',
+        {
+          'border-red-400 ring-red-400 ring-1 bg-red-100 bg-opacity-60':
+            errorMessage !== null,
+        },
+      ]"
       type="email"
       @change="validateEmail"
     />
@@ -14,6 +20,7 @@
 </template>
 
 <script>
+import { cartStore } from '@/store'
 import AInputTextField from '~/components/atoms/AInputTextField.vue'
 
 export default {
@@ -27,9 +34,10 @@ export default {
   },
   methods: {
     validateEmail (event) {
+      cartStore.updateEmail(event.target.value)
       if (
         this.isValidLength(event.target.value) &&
-        this.isValidPattern(event.target.value)
+          this.isValidPattern(event.target.value)
       ) {
         this.$emit('valid-email')
         this.errorMessage = null

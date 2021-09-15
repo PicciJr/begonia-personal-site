@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { cartStore } from '@/store'
 import AInputTextField from '../atoms/AInputTextField.vue'
 
 export default {
@@ -36,11 +37,12 @@ export default {
   },
   methods: {
     validatePostalCode (event) {
+      cartStore.updatePostalCode(event.target.value)
       if (this.isValidLength(event.target.value)) {
         this.$emit('valid-postal')
         this.errorMessage = null
       } else {
-        this.$emit('valid-postal')
+        this.$emit('invalid-postal')
         this.errorMessage = 'Por favor, introduzca un código postal válido'
       }
     },

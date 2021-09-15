@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { cartStore } from '@/store'
 import AInputTextField from '~/components/atoms/AInputTextField.vue'
 
 export default {
@@ -32,6 +33,7 @@ export default {
   },
   methods: {
     validateStreet (event) {
+      cartStore.updateStreet(event.target.value)
       if (this.isValidLength(event.target.value)) {
         this.$emit('valid-street')
         this.errorMessage = null

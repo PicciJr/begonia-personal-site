@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { cartStore } from '@/store'
 import AInputTextField from '../atoms/AInputTextField.vue'
 
 export default {
@@ -35,6 +36,7 @@ export default {
   },
   methods: {
     validatePhone (event) {
+      cartStore.updatePhoneNumber(event.target.value)
       if (this.isValidLength(event.target.value)) {
         this.$emit('valid-phone')
         this.errorMessage = null
