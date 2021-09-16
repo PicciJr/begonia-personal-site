@@ -143,6 +143,17 @@ export default class Cart extends VuexModule {
   }
 
   @Action
+  async setCartAddress () {
+    try {
+      await this.store.$apiConnection.put(
+        `cart/${this.cart.token}/address`, {
+          address: this.shippingAddress
+        }
+      )
+    } catch (err) {}
+  }
+
+  @Action
   async completeOrder () {
     try {
       const response = await this.store.$apiConnection.put(

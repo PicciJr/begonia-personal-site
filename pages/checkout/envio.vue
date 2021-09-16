@@ -19,7 +19,7 @@
     <!-- Order summary / Costs -->
     <a-cart-summary :cart="cart" class="mb-8" />
     <!-- CTA / TODO: cambiarlo por un sticky footer cuando haga el sticky footer generico -->
-    <m-checkout-next-step-button :is-enabled="isValidForm" button-text="Siguiente paso" />
+    <m-checkout-next-step-button :is-enabled="isValidForm" button-text="Siguiente paso" @click="setShippingAddress" />
   </div>
 </template>
 
@@ -64,6 +64,10 @@ export default Vue.extend({
     },
     handleInvalidForm () {
       this.isValidForm = false
+    },
+    async setShippingAddress () {
+      await cartStore.setCartAddress()
+      this.handleNextStep()
     }
   }
 })
