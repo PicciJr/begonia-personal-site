@@ -91,6 +91,9 @@ export default Vue.extend({
     ...mapState({
       cart: state => cartStore.cart
     }),
+    isEmtpyCart () {
+      return this.cart.items.length <= 0
+    },
     amount () {
       const productInStore = this.cart.items.find(
         item => item.id === this.product.id
@@ -116,11 +119,18 @@ export default Vue.extend({
     toggleLongDescriptionVisibility () {
       this.isLongDescriptionVisible = !this.isLongDescriptionVisible
     },
-    addToCart () {
-      cartStore.createCart({
-        productId: this.product.id,
-        quantity: 1
-      })
+    async addToCart () {
+      if (this.isEmtpyCart) {
+        await cartStore.createCart({
+          productId: this.product.id,
+          quantity: 1
+        })
+      } else {
+        await cartStore.addCartItem({
+          productId: this.product.id,
+          quantity: 1
+        })
+      }
     },
     async handleDecreaseAmount () {
       if (this.isProductInCartAlready) {

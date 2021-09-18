@@ -35,19 +35,19 @@ export default class Cart extends VuexModule {
   }
 
   @Mutation
-  ADD_CART_ITEM (item: IProduct) {
-    // TODO
-  }
+  // ADD_CART_ITEM (cart: ICart) {
+  //   // TODO
+  // }
 
   @Mutation
-  UPDATE_CART_ITEM (updatedCart: ICart) {
-    this.cart = updatedCart
-  }
+  // UPDATE_CART_ITEM (updatedCart: ICart) {
+  //   this.cart = updatedCart
+  // }
 
-  @Mutation
-  REMOVE_CART_ITEM (updatedCart: ICart) {
-    this.cart = updatedCart
-  }
+  // @Mutation
+  // REMOVE_CART_ITEM (updatedCart: ICart) {
+  //   this.cart = updatedCart
+  // }
 
   @Mutation
   RESET_CART () {
@@ -115,9 +115,14 @@ export default class Cart extends VuexModule {
   }
 
   @Action
-  addCartItem (product: IProduct) {
-    // TODO: integracion API
-    this.ADD_CART_ITEM(product)
+  async addCartItem ({ productId, quantity }) {
+    try {
+      const updatedCart = await this.store.$apiConnection.post(
+        `cart/${this.cart.token}/${productId}`,
+        { quantity }
+      )
+      this.SET_CART(updatedCart.data)
+    } catch (err) {}
   }
 
   @Action
@@ -127,18 +132,18 @@ export default class Cart extends VuexModule {
         `cart/${this.cart.token}/${product.id}`,
         { quantity }
       )
-      this.UPDATE_CART_ITEM(updatedCart.data)
+      this.SET_CART(updatedCart.data)
     } catch (err) {}
   }
 
   @Action
   async removeCartItem (product) {
     try {
-      const response = await this.store.$apiConnection.delete(
+      const updatedCart = await this.store.$apiConnection.delete(
         `cart/${this.cart.token}/${product.id}`
       )
-      this.REMOVE_CART_ITEM(response.data)
-      return response.data
+      this.SET_CART(updatedCart.data)
+      return updatedCart.data
     } catch (err) {}
   }
 
