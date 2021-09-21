@@ -98,7 +98,6 @@ export default class Cart extends VuexModule {
     const response = await this.store.$apiConnection.get(
       `cart/${this.cart.token}`
     )
-    console.log('geteo cart y obtengo', response.data)
     this.SET_CART(response.data)
     this.SET_SHIPPING_ADDRESS(response.data.shippingAddress)
   }
