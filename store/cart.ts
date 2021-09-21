@@ -1,5 +1,4 @@
 import { Module, VuexModule, Action, Mutation } from 'vuex-module-decorators'
-import { IProduct } from '~/types/product'
 import { ICart } from '~/types/cart'
 import { IAddress } from '~/types/address'
 
@@ -13,7 +12,6 @@ export default class Cart extends VuexModule {
     items: [],
     subtotal: 0.0,
     status: null
-    // email: '',
   }
 
   shippingAddress: IAddress = {
@@ -30,24 +28,14 @@ export default class Cart extends VuexModule {
   }
 
   @Mutation
-  SET_CART_TOKEN (token) {
-    this.cart.token = token
+  SET_SHIPPING_ADDRESS (shippingAddress: IAddress) {
+    this.shippingAddress = shippingAddress
   }
 
   @Mutation
-  // ADD_CART_ITEM (cart: ICart) {
-  //   // TODO
-  // }
-
-  @Mutation
-  // UPDATE_CART_ITEM (updatedCart: ICart) {
-  //   this.cart = updatedCart
-  // }
-
-  // @Mutation
-  // REMOVE_CART_ITEM (updatedCart: ICart) {
-  //   this.cart = updatedCart
-  // }
+  SET_CART_TOKEN (token) {
+    this.cart.token = token
+  }
 
   @Mutation
   RESET_CART () {
@@ -56,7 +44,6 @@ export default class Cart extends VuexModule {
       subtotal: 0.0,
       status: null,
       email: ''
-      // shippingAddress: null
     }
   }
 
@@ -111,7 +98,9 @@ export default class Cart extends VuexModule {
     const response = await this.store.$apiConnection.get(
       `cart/${this.cart.token}`
     )
+    console.log('geteo cart y obtengo', response.data)
     this.SET_CART(response.data)
+    this.SET_SHIPPING_ADDRESS(response.data.shippingAddress)
   }
 
   @Action

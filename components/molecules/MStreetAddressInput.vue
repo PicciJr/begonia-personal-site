@@ -1,6 +1,7 @@
 <template>
   <div>
     <a-input-text-field
+      v-model="street"
       placeholder="Dirección de entrega: calle, número"
       :class="[
         'w-full',
@@ -19,6 +20,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { cartStore } from '@/store'
 import AInputTextField from '~/components/atoms/AInputTextField.vue'
 
@@ -29,6 +31,16 @@ export default {
   data () {
     return {
       errorMessage: null
+    }
+  },
+  computed: {
+    ...mapState({
+      street: state => cartStore.shippingAddress.street
+    })
+  },
+  created () {
+    if (this.isValidLength(this.street)) {
+      this.$emit('valid-street')
     }
   },
   methods: {

@@ -1,6 +1,8 @@
 <template>
   <div>
     <a-dropdown-field
+      v-model="selectedOption"
+      :selected-option="selectedOption"
       :options="allowedCities"
       :class="[
         'w-full',
@@ -19,6 +21,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { cartStore } from '@/store'
 import ADropdownField from '~/components/atoms/ADropdownField.vue'
 
@@ -29,13 +32,22 @@ export default {
   data () {
     return {
       errorMessage: null,
-      allowedCities: null,
-      selectedOption: null
+      allowedCities: null
+      // selectedOption: null
     }
+  },
+  computed: {
+    ...mapState({
+      selectedOption: state => cartStore.shippingAddress.province
+    })
   },
   created () {
     this.allowedCities = this.getAllowedCities()
-    this.$emit('invalid-city')
+    if (this.isValidCitySelected(this.selectedOption)) {
+      this.$emit('valid-city')
+    } else {
+      this.$emit('invalid-city')
+    }
   },
   methods: {
     validateCity (event) {

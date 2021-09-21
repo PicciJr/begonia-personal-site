@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { cartStore } from '@/store'
 import AInputTextField from '../atoms/AInputTextField.vue'
 
@@ -31,8 +32,17 @@ export default {
   },
   data () {
     return {
-      errorMessage: null,
-      postalCode: null
+      errorMessage: null
+    }
+  },
+  computed: {
+    ...mapState({
+      postalCode: state => cartStore.shippingAddress.postalCode
+    })
+  },
+  created () {
+    if (this.isValidLength(this.postalCode)) {
+      this.$emit('valid-postal')
     }
   },
   methods: {

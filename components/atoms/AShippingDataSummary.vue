@@ -10,10 +10,10 @@
       </div>
       <!-- Datos -->
       <div class="flex flex-col w-full space-y-3">
-        <span>{{ shippingAddress.street }}</span>
-        <span>{{ shippingAddress.phoneNumber }}</span>
-        <span>{{ shippingAddress.postalCode }}</span>
-        <span>{{ shippingAddress.province }}</span>
+        <span><strong>Calle:</strong> {{ shippingAddress.street }}</span>
+        <span><strong>Teléfono:</strong> {{ shippingAddress.phoneNumber }}</span>
+        <span><strong>Código postal:</strong> {{ shippingAddress.postalCode }}</span>
+        <span><strong>Ciudad:</strong> {{ shippingAddress.province }}</span>
       </div>
     </div>
   </div>
@@ -21,12 +21,13 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { mapState } from 'vuex'
+import { cartStore } from '~/store'
 export default Vue.extend({
-  props: {
-    shippingAddress: {
-      type: Object,
-      default: null
-    }
+  computed: {
+    ...mapState({
+      shippingAddress: state => cartStore.shippingAddress
+    })
   }
 })
 </script>

@@ -1,6 +1,7 @@
 <template>
   <div>
     <a-input-text-field
+      v-model="email"
       placeholder="Correo electrónico"
       :class="[
         'w-full',
@@ -20,6 +21,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { cartStore } from '@/store'
 import AInputTextField from '~/components/atoms/AInputTextField.vue'
 
@@ -32,12 +34,22 @@ export default {
       errorMessage: null
     }
   },
+  computed: {
+    ...mapState({
+      email: state => cartStore.shippingAddress.email
+    })
+  },
+  created () {
+    if (this.isValidLength(this.email) && this.isValidPattern(this.email)) {
+      this.$emit('valid-email')
+    }
+  },
   methods: {
     validateEmail (event) {
       cartStore.updateEmail(event.target.value)
       if (
         this.isValidLength(event.target.value) &&
-          this.isValidPattern(event.target.value)
+        this.isValidPattern(event.target.value)
       ) {
         this.$emit('valid-email')
         this.errorMessage = null

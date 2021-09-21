@@ -57,7 +57,7 @@ export default Vue.extend({
       this.$router.push('/checkout/pago')
     },
     async handleRemoveProduct (product) {
-      // TODO: usar store
+      await cartStore.removeCartItem(product)
     },
     handleValidForm () {
       this.isValidForm = true
