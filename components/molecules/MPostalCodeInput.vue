@@ -58,7 +58,8 @@ export default {
     },
     preventInvalidChars (event) {
       // keycode = 9 to allow tab index
-      if ((event.which < 48 || event.which > 57) && event.which !== 9) {
+      // keycode = 8, 46 to allow deletions
+      if ((event.which < 48 || event.which > 57) && event.which !== 9 && event.which !== 8 && event.which !== 46) {
         event.preventDefault()
       }
     },
