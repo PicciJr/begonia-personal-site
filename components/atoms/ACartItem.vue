@@ -43,7 +43,7 @@ export default Vue.extend({
   },
   computed: {
     imgResolver (): string {
-      return `${process.env.STRAPI_BASE_URL}${this.product.images[0].url}`
+      return `${this.product.images[0].url}`
     }
   },
   methods: {

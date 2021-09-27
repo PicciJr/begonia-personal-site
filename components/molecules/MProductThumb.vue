@@ -1,3 +1,4 @@
+<!-- Small product thumb for reduced areas like related products -->
 <template>
   <div class="flex flex-col flex-wrap">
     <img :src="product.images[0]" alt="" class="object-cover rounded-md max-h-24">

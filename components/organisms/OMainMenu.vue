@@ -32,21 +32,22 @@ export default Vue.extend({
         },
         {
           title: 'Tienda',
-          linkTo: '',
-          subitems: [
-            {
-              title: 'Encargos',
-              linkTo: ''
-            },
-            {
-              title: 'Láminas',
-              linkTo: ''
-            },
-            {
-              title: 'Originales',
-              linkTo: ''
-            }
-          ]
+          linkTo: '/tienda'
+          // TODO: reactivar cuando se usen submenus
+          // subitems: [
+          //   {
+          //     title: 'Encargos',
+          //     linkTo: ''
+          //   },
+          //   {
+          //     title: 'Láminas',
+          //     linkTo: ''
+          //   },
+          //   {
+          //     title: 'Originales',
+          //     linkTo: ''
+          //   }
+          // ]
         },
         {
           title: 'Contacto',
