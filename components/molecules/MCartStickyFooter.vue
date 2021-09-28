@@ -8,7 +8,7 @@ usar en otros contextos como el checkout-->
     <a-spinner-field />
     <a-button
       cta-text="Añadir al carrito"
-      class="w-2/3 px-4 py-1 text-lg uppercase bg-begonia-primary-purple"
+      class="w-2/3 px-4 py-1 text-lg uppercase bg-begonia-primary-purple hover:bg-purple-200"
       @click="addToCart"
     />
   </div>

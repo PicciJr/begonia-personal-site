@@ -26,7 +26,7 @@
     <!-- Add to cart -->
     <a-button
       :cta-text="ctaButtonText"
-      class="w-full px-4 py-2 mb-4 uppercase bg-begonia-primary-purple"
+      class="w-full px-4 py-2 mb-4 uppercase bg-begonia-primary-purple hover:bg-purple-200"
       @click="addToCart"
     />
     <!-- Product description -->
@@ -74,8 +74,10 @@ export default Vue.extend({
   layout: 'default',
   async asyncData ({ app, route }) {
     try {
-      const productId = route.params.id
-      const response = await app.$apiConnection.get(`/product/${productId}`)
+      // const productId = route.params.id
+      // const response = await app.$apiConnection.get(`/product/${productId}`)
+      const productSlug = route.params.slug
+      const response = await app.$apiConnection.get(`/product/slug/${productSlug}`)
       const product = response.data
       return {
         product
