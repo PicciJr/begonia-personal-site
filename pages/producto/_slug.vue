@@ -17,6 +17,7 @@
     </div>
     <!-- Product options -->
     <m-product-configuration-options
+      v-if="isProductInCartAlready"
       :product="product"
       :amount="amount"
       class="mb-4"
@@ -27,7 +28,7 @@
     <a-button
       :cta-text="ctaButtonText"
       class="w-full px-4 py-2 mb-4 uppercase bg-begonia-primary-purple hover:bg-purple-200"
-      @click="addToCart"
+      @click="handleMainButtonAction"
     />
     <!-- Product description -->
     <div class="mb-16">
@@ -45,12 +46,19 @@
       </div>
     </div>
     <!-- Related products -->
-    <o-similar-products
+    <!-- TODO: reactivar -->
+    <!-- <o-similar-products
       class="mt-8"
       :similar-products="product.similarProducts"
-    />
+    /> -->
     <!-- Sticky footer Add to cart -->
-    <m-cart-sticky-footer class="w-full h-20" :product="product" />
+    <m-cart-sticky-footer
+      class="w-full h-20"
+      :product="product"
+      :amount="amount"
+      @decrease-amount="handleDecreaseAmount"
+      @increase-amount="increaseProductAmount"
+    />
   </div>
 </template>
 
@@ -62,22 +70,23 @@ import AButton from '@/components/atoms/AButton.vue'
 import AImageCarousel from '@/components/atoms/AImageCarousel.vue'
 import MProductConfigurationOptions from '@/components/molecules/MProductConfigurationOptions.vue'
 import MCartStickyFooter from '~/components/molecules/MCartStickyFooter.vue'
-import OSimilarProducts from '~/components/organisms/OSimilarProducts.vue'
+// import OSimilarProducts from '~/components/organisms/OSimilarProducts.vue'
 export default Vue.extend({
+  name: 'Product',
   components: {
     AButton,
     AImageCarousel,
     MProductConfigurationOptions,
-    MCartStickyFooter,
-    OSimilarProducts
+    MCartStickyFooter
+    // OSimilarProducts
   },
   layout: 'default',
   async asyncData ({ app, route }) {
     try {
-      // const productId = route.params.id
-      // const response = await app.$apiConnection.get(`/product/${productId}`)
       const productSlug = route.params.slug
-      const response = await app.$apiConnection.get(`/product/slug/${productSlug}`)
+      const response = await app.$apiConnection.get(
+        `/product/slug/${productSlug}`
+      )
       const product = response.data
       return {
         product
@@ -109,11 +118,15 @@ export default Vue.extend({
       return this.isLongDescriptionVisible ? 'Leer menos' : 'Leer más'
     },
     isProductInCartAlready () {
-      return this.cart?.items?.find(product => product.id === this.product.id)
+      return (
+        typeof this.cart?.items?.find(
+          product => product.id === this.product.id
+        ) !== 'undefined'
+      )
     },
     ctaButtonText () {
       return this.isProductInCartAlready
-        ? 'Producto ya asignado'
+        ? 'Finalizar compra'
         : 'Añadir al carrito'
     }
   },
@@ -132,6 +145,13 @@ export default Vue.extend({
           productId: this.product.id,
           quantity: 1
         })
+      }
+    },
+    handleMainButtonAction () {
+      if (!this.isProductInCartAlready) {
+        this.addToCart()
+      } else {
+        this.$router.push('/checkout/envio')
       }
     },
     async handleDecreaseAmount () {

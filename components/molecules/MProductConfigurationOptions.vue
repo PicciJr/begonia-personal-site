@@ -9,13 +9,16 @@
       />
     </div>
     <!-- Amounts -->
-    <div class="mt-6">
-      <span class="block mb-2">Cantidad</span>
+    <div class="flex items-center mt-6">
       <a-spinner-field
         :amount="amount"
         @decrease-amount="$emit('decrease-amount')"
         @increase-amount="$emit('increase-amount')"
       />
+      <span class="pl-4">
+        <strong>Tienes {{ amount }} unidad(es)</strong> de este producto en tu
+        carrito
+      </span>
     </div>
   </div>
 </template>

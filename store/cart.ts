@@ -18,7 +18,7 @@ export default class Cart extends VuexModule {
     email: '',
     phoneNumber: '',
     postalCode: '',
-    province: '',
+    province: '-- Provincia --',
     street: ''
   }
 
@@ -99,7 +99,9 @@ export default class Cart extends VuexModule {
       `cart/${this.cart.token}`
     )
     this.SET_CART(response.data)
-    this.SET_SHIPPING_ADDRESS(response.data.shippingAddress)
+    if (response.data?.shippingAddress) {
+      this.SET_SHIPPING_ADDRESS(response.data.shippingAddress)
+    }
   }
 
   @Action
@@ -138,11 +140,9 @@ export default class Cart extends VuexModule {
   @Action
   async setCartAddress () {
     try {
-      await this.store.$apiConnection.put(
-        `cart/${this.cart.token}/address`, {
-          address: this.shippingAddress
-        }
-      )
+      await this.store.$apiConnection.put(`cart/${this.cart.token}/address`, {
+        address: this.shippingAddress
+      })
     } catch (err) {}
   }
 

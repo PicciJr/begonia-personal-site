@@ -1,9 +1,9 @@
 <!-- Spinner field to incremente o decrement amounts by click or touch -->
 <template>
   <div class="flex items-center">
-    <svg-icon name="minus-circle" class="w-8 h-8 text-gray-400 stroke-current" @click="$emit('decrease-amount')" />
-    <span class="px-2">{{ amount }}</span>
-    <svg-icon name="plus-circle" class="w-8 h-8 text-gray-400 stroke-current" @click="$emit('increase-amount')" />
+    <svg-icon name="minus-circle" class="w-8 h-8 text-gray-400 cursor-pointer stroke-current" @click="$emit('decrease-amount')" />
+    <span class="px-2 font-bold">{{ amount }}</span>
+    <svg-icon name="plus-circle" class="w-8 h-8 text-gray-400 cursor-pointer stroke-current" @click="$emit('increase-amount')" />
   </div>
 </template>
 

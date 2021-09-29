@@ -1,13 +1,17 @@
 <!-- Cart item for checkout summary -->
 <template>
   <div class="relative flex h-16 p-1 rounded-lg shadow-md ring-1 ring-gray-200">
-    <img
-      class="object-cover w-24 rounded-md"
-      :src="imgResolver"
-      :alt="product.longDescription"
-    >
+    <nuxt-link :to="`/producto/${product.slug}`">
+      <img
+        class="object-cover w-24 h-full rounded-md"
+        :src="imgResolver"
+        :alt="product.longDescription"
+      >
+    </nuxt-link>
     <div class="flex flex-col justify-between pl-4">
-      <span>{{ product.title }}</span>
+      <nuxt-link :to="`/producto/${product.slug}`">
+        <span>{{ product.title }}</span>
+      </nuxt-link>
       <div class="flex items-center justify-between space-x-3">
         <a-spinner-field
           :amount="product.amount"
