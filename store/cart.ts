@@ -159,6 +159,11 @@ export default class Cart extends VuexModule {
   }
 
   @Action
+  resetCartToInitialStatus () {
+    this.RESET_CART()
+  }
+
+  @Action
   updateEmail (email) {
     this.UPDATE_EMAIL(email)
   }

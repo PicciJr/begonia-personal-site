@@ -43,6 +43,7 @@ export default {
         onError (err) {
           console.log('paypal onError', err)
           router.push('/checkout/pedido-ko')
+          cartStore.resetCartToInitialStatus()
           throw err
           // Show a cancel page, or return to cart
         }
