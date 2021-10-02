@@ -1,6 +1,6 @@
 <!-- Controls how elements are stacked and should look like across the app -->
 <template>
-  <div class="max-w-md mx-auto">
+  <div class="max-w-3xl mx-auto">
     <!-- Burger menu (mobile) -->
     <div class="px-4">
       <a-burger-menu-icon class="fixed top-0 z-50 w-10 h-10 p-2 mt-2 text-gray-500 rounded-full fill-current bg-begonia-primary-gray md:hidden" />
@@ -12,7 +12,7 @@
     <!-- View content -->
     <Nuxt class="relative z-20" />
     <!-- Footer -->
-    <o-footer class="flex items-center justify-center w-full max-w-md pb-4" />
+    <o-footer class="flex items-center justify-center w-full max-w-md pb-4 mx-auto" />
   </div>
 </template>
 

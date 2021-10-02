@@ -2,23 +2,22 @@
 <template>
   <nuxt-link
     :to="`/producto/${product.slug}`"
-    class="relative flex items-end justify-center w-48 h-56 rounded-md shadow-xl md:w-56 md:h-64 hover:shadow-2xl"
+    class="relative flex items-end justify-center w-64 h-56 py-1 rounded-md shadow-xl md:w-56 md:h-64 hover:shadow-2xl"
   >
     <img
       :src="product.images[0].url"
       alt=""
-      class="absolute top-0 h-48 rounded-md shadow-md left-1/2"
-      style="transform: translate(-50%, -50%);"
+      class="absolute top-0 h-48 rounded-md shadow-md left-1/2 productCardImage"
     >
-    <div class="flex flex-col p-2 space-y-3">
-      <h3 class="text-lg font-bold">
+    <div class="flex flex-col items-center p-2 space-y-1">
+      <h3 class="font-bold text-md">
         {{ product.title }}
       </h3>
       <span
-        class="mb-2 font-medium text-md md:text-xl"
+        class="mb-2 font-medium text-md md:text-lg"
       >{{ product.price }} €</span>
       <a-button
-        class="w-40 px-2 py-1 text-sm font-bold uppercase rounded-md text-begonia-sec-gray bg-begonia-primary-purple hover:bg-purple-200"
+        class="px-2 py-1 text-sm font-bold uppercase rounded-md text-begonia-sec-gray bg-begonia-primary-purple hover:bg-purple-200"
       >
         Ver producto
       </a-button>
@@ -52,3 +51,15 @@ export default Vue.extend({
   }
 })
 </script>
+
+<style scoped>
+.productCardImage {
+  transform: translate(-50%, -50%);
+}
+
+@screen md {
+  .productCardImage {
+    transform: translate(-50%, -35%);
+  }
+}
+</style>

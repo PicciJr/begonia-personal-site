@@ -1,6 +1,6 @@
 <!-- Contact page with form -->
 <template>
-  <div class="px-4 mt-16 mb-8 text-begonia-sec-gray">
+  <div class="max-w-md px-4 mx-auto mt-16 mb-8 text-begonia-sec-gray">
     <div v-if="!isValidForm">
       <p class="mb-4 font-bold text-center text-md">
         ¿Alguna duda? Escríbenos

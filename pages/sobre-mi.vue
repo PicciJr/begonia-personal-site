@@ -1,6 +1,6 @@
 <!-- About me page -->
 <template>
-  <div class="flex flex-col items-center justify-center px-8 mx-auto text-md md:text-lg text-begonia-sec-gray">
+  <div class="flex flex-col items-center justify-center max-w-md px-8 mx-auto text-md md:text-lg text-begonia-sec-gray">
     <!-- Profile image -->
     <img
       src="https://cdn.domestika.org/c_fill,dpr_auto,f_auto,h_256,pg_1,t_base_params,w_256/v1574944295/avatars/001/463/838/1463838-original.jpg?1574944295"
