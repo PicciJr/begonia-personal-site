@@ -36,6 +36,10 @@ export default Vue.extend({
       type: Object,
       default: null
     },
+    selectedVariant: {
+      type: Object,
+      default: null
+    },
     amount: {
       type: Number,
       default: 0

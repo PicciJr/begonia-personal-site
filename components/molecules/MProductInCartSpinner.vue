@@ -8,8 +8,8 @@
         @increase-amount="$emit('increase-amount')"
       />
       <span class="pl-4">
-        <strong>Tienes {{ amount }} unidad(es)</strong> de este producto en tu
-        carrito
+        <strong>Tienes {{ amount }} unidad(es) {{ variantText }}</strong> de
+        este producto en tu carrito
       </span>
     </div>
   </div>
@@ -24,9 +24,25 @@ export default Vue.extend({
     ASpinnerField
   },
   props: {
+    product: {
+      type: Object,
+      default: null
+    },
+    selectedVariant: {
+      type: Object,
+      default: null
+    },
     amount: {
       type: Number,
       default: 1
+    }
+  },
+  computed: {
+    variantText () {
+      if (!this.selectedVariant) {
+        return ''
+      }
+      return this.selectedVariant.variant
     }
   }
 })

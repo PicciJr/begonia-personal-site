@@ -73,10 +73,11 @@ export default class Cart extends VuexModule {
   }
 
   @Action
-  async createCart ({ productId, quantity }) {
+  async createCart ({ productId, variantId = null, quantity }) {
     try {
       const newCart = await this.store.$apiConnection.post('cart', {
         productId,
+        variantId,
         quantity
       })
       this.SET_CART(newCart.data)
@@ -105,32 +106,39 @@ export default class Cart extends VuexModule {
   }
 
   @Action
-  async addCartItem ({ productId, quantity }) {
+  async addCartItem ({ productId, variantId = null, quantity }) {
     try {
       const updatedCart = await this.store.$apiConnection.post(
         `cart/${this.cart.token}/${productId}`,
-        { quantity }
+        { variantId, quantity }
       )
       this.SET_CART(updatedCart.data)
     } catch (err) {}
   }
 
   @Action
-  async updateCartItem ({ product, quantity }) {
+  async updateCartItem ({ product, variantId = null, quantity }) {
     try {
       const updatedCart = await this.store.$apiConnection.put(
         `cart/${this.cart.token}/${product.id}`,
-        { quantity }
+        { variantId, quantity }
       )
       this.SET_CART(updatedCart.data)
     } catch (err) {}
   }
 
   @Action
-  async removeCartItem (product) {
+  async removeCartItem ({ product, variantId = null }) {
+    // NuxtJS@axios does NOT work with "delete" if used with BODY payload
     try {
-      const updatedCart = await this.store.$apiConnection.delete(
-        `cart/${this.cart.token}/${product.id}`
+      const updatedCart = await this.store.$apiConnection.request(
+        `cart/${this.cart.token}/${product.id}`,
+        {
+          data: {
+            variantId
+          },
+          method: 'delete'
+        }
       )
       this.SET_CART(updatedCart.data)
       return updatedCart.data
@@ -192,5 +200,19 @@ export default class Cart extends VuexModule {
     return this.cart.items.reduce((acc, item) => {
       return acc + item.amount
     }, 0)
+  }
+
+  get productInCart () {
+    return (productId) => {
+      return this.cart?.items?.find(product => product.id === productId)
+    }
+  }
+
+  get productVariantInCart () {
+    return (variantId) => {
+      return this.cart.items.find(
+        ({ variantSelected }) => variantSelected?.id === variantId ?? false
+      ) ?? null
+    }
   }
 }

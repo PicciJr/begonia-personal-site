@@ -19,6 +19,7 @@ export interface IProduct {
   images: string[]
   hasVariants?: boolean
   variants: IProduct[]
+  variantSelected: object
   slug: string
   similarProducts?: IProduct[]
 }

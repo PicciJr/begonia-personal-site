@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-md px-4 mx-auto mt-16 mb-8 text-begonia-sec-gray">
+  <div class="max-w-md px-4 mx-auto mt-16 mb-8 md:mt-4 text-begonia-sec-gray">
     <!-- Image carousel -->
     <a-image-carousel
       :images="product.images"
@@ -9,11 +9,11 @@
       :hoverpause="true"
     />
     <!-- Title -->
-    <h3 class="text-2xl font-bold md:text-4xl">
+    <h3 class="mb-4 text-2xl font-bold md:text-4xl">
       {{ product.title }}
     </h3>
     <!-- Add to cart management -->
-    <o-product-add-to-cart :product="product" />
+    <o-product-add-to-cart :product="product" class="mb-4" />
     <!-- Product description -->
     <div class="mb-16">
       <h3 class="mb-4 text-xl font-bold md:text-3xl">
@@ -37,24 +37,24 @@
     /> -->
     <!-- Sticky footer Add to cart -->
     <!-- TODO: que el sticky footer importe la logica del oproductaddtocart para no duplicar -->
-    <m-cart-sticky-footer
+    <!-- <m-cart-sticky-footer
       class="w-full h-20"
       :product="product"
-    />
+    /> -->
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import AImageCarousel from '@/components/atoms/AImageCarousel.vue'
-import MCartStickyFooter from '~/components/molecules/MCartStickyFooter.vue'
+// import MCartStickyFooter from '~/components/molecules/MCartStickyFooter.vue'
 import OProductAddToCart from '~/components/molecules/OProductAddToCart.vue'
 // import OSimilarProducts from '~/components/organisms/OSimilarProducts.vue'
 export default Vue.extend({
   name: 'Product',
   components: {
     AImageCarousel,
-    MCartStickyFooter,
+    // MCartStickyFooter,
     OProductAddToCart
     // OSimilarProducts
   },

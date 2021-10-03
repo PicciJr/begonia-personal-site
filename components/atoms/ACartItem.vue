@@ -9,8 +9,8 @@
       >
     </nuxt-link>
     <div class="flex flex-col justify-between pl-4">
-      <nuxt-link :to="`/producto/${product.slug}`">
-        <span>{{ product.title }}</span>
+      <nuxt-link :to="`/producto/${product.slug}`" class="space-x-1">
+        <span>{{ product.title }}</span><span v-if="hasVariants" class="text-xs">({{ variantInfo }})</span>
       </nuxt-link>
       <div class="flex items-center justify-between space-x-3">
         <a-spinner-field
@@ -18,7 +18,7 @@
           @decrease-amount="decreaseAmount"
           @increase-amount="increaseAmount"
         />
-        <span class="font-bold">{{ product.price }} €</span>
+        <span class="font-bold">{{ priceSelected }} €</span>
       </div>
     </div>
     <!-- Delete product button -->
@@ -48,18 +48,45 @@ export default Vue.extend({
   computed: {
     imgResolver (): string {
       return `${this.product.images[0].url}`
+    },
+    hasVariants () {
+      return (
+        this.product.variantSelected !== null &&
+        typeof this.product.variantSelected !== 'undefined'
+      )
+    },
+    variantInfo () {
+      return this.product.variantSelected.variant
+    },
+    priceSelected () {
+      if (!this.hasVariants) {
+        return this.product.price
+      }
+      return this.product.variants.find(
+        ({ id }) => id === this.product?.variantSelected?.id
+      )?.price
     }
   },
   methods: {
     async decreaseAmount () {
-      await cartStore.updateCartItem({
-        product: this.product,
-        quantity: this.product.amount - 1
-      })
+      const newAmount = this.product.amount - 1
+      if (newAmount === 0) {
+        await cartStore.removeCartItem({
+          product: this.product,
+          variantId: this.product?.variantSelected?.id ?? null
+        })
+      } else {
+        await cartStore.updateCartItem({
+          product: this.product,
+          variantId: this.product?.variantSelected?.id ?? null,
+          quantity: newAmount
+        })
+      }
     },
     async increaseAmount () {
       await cartStore.updateCartItem({
         product: this.product,
+        variantId: this.product?.variantSelected?.id ?? null,
         quantity: this.product.amount + 1
       })
     }
