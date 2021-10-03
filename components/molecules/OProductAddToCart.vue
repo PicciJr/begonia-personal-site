@@ -143,7 +143,7 @@ export default {
         if (newAmount === 0) {
           await cartStore.removeCartItem({
             product: this.product,
-            variantId: this.product?.variantSelected?.id ?? null
+            variantId: this.selectedVariant?.id ?? null
           })
         } else {
           await cartStore.updateCartItem({
