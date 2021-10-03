@@ -13,7 +13,7 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     script: [
       {
-        src: `https://www.paypal.com/sdk/js?client-id=${process.env.PAYPAL_CLIENT_ID}`,
+        src: `https://www.paypal.com/sdk/js?currency=EUR&client-id=${process.env.PAYPAL_CLIENT_ID}`,
         body: true
       }
     ]
