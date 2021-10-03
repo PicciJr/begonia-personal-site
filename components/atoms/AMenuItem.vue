@@ -1,7 +1,7 @@
 <!-- Single menu item with subitems if applies -->
 <template>
   <div>
-    <nuxt-link :to="menuItem.linkTo">
+    <nuxt-link :to="menuItem.linkTo" @click.native="closeMenu">
       {{ menuItem.title }}
     </nuxt-link>
     <div
@@ -21,6 +21,8 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { commonStore } from '~/store'
+
 import AMenuSubitem from '~/components/atoms/AMenuSubitem.vue'
 export default Vue.extend({
   components: {
@@ -30,6 +32,11 @@ export default Vue.extend({
     menuItem: {
       type: Object,
       default: null
+    }
+  },
+  methods: {
+    closeMenu () {
+      commonStore.setIsMenuOpen(false)
     }
   }
 })
