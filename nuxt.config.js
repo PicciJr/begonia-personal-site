@@ -23,7 +23,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/vue-glide.js', '~/plugins/api.js', '~/plugins/vue-mask.js'],
+  plugins: ['~/plugins/vue-glide.js', '~/plugins/api.js', '~/plugins/vue-mask.js', '~/plugins/filters.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,

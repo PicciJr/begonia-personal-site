@@ -7,15 +7,15 @@
     <div class="flex flex-col space-y-3">
       <div class="flex justify-between">
         <span>Items</span>
-        <span>{{ cart.subtotal }}</span>
+        <span>{{ cart.subtotal | formatToEuroCurrency }}</span>
       </div>
       <div class="flex justify-between">
         <span>Costes de envío</span>
-        <span>{{ cart.shippingCosts || 0 }}</span>
+        <span>{{ cart.shippingCosts || 0.0 | formatToEuroCurrency }}</span>
       </div>
       <div class="flex justify-between font-bold">
         <span>Total</span>
-        <span>{{ cart.total || 0 }} </span>
+        <span>{{ cart.total || 0.0 | formatToEuroCurrency }} </span>
       </div>
     </div>
   </div>

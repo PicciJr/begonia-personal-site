@@ -18,7 +18,7 @@
           @decrease-amount="decreaseAmount"
           @increase-amount="increaseAmount"
         />
-        <span class="font-bold">{{ priceSelected }} €</span>
+        <span class="font-bold">{{ priceSelected | formatToEuroCurrency }}</span>
       </div>
     </div>
     <!-- Delete product button -->

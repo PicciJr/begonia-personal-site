@@ -9,7 +9,7 @@
       @change="updateVariantSelected"
     />
     <!-- Precio -->
-    <span class="text-lg font-medium md:text-xl">{{ priceSelected }}€</span>
+    <span class="text-lg font-medium md:text-xl">{{ priceSelected | formatToEuroCurrency }}</span>
     <!-- Product amount configuration -->
     <m-product-in-cart-spinner
       v-if="isProductInCartAlready"

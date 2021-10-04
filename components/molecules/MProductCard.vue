@@ -15,7 +15,7 @@
       </h3>
       <span
         class="mb-2 font-bold text-md md:text-lg"
-      ><span class="text-xs font-medium">desde</span> {{ productLowestPrice }} €</span>
+      ><span class="text-xs font-medium">desde</span> {{ productLowestPrice | formatToEuroCurrency }}</span>
       <a-button
         class="px-2 py-1 text-sm font-bold uppercase rounded-md text-begonia-sec-gray bg-begonia-primary-purple hover:bg-purple-200"
       >
