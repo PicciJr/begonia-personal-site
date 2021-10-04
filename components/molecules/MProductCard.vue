@@ -10,12 +10,12 @@
       class="absolute top-0 h-48 rounded-md shadow-md left-1/2 productCardImage"
     >
     <div class="flex flex-col items-center p-2 space-y-1">
-      <h3 class="font-bold text-md">
+      <h3 class="font-medium text-md">
         {{ product.title }}
       </h3>
       <span
-        class="mb-2 font-medium text-md md:text-lg"
-      >{{ product.price }} €</span>
+        class="mb-2 font-bold text-md md:text-lg"
+      ><span class="text-xs font-medium">desde</span> {{ productLowestPrice }} €</span>
       <a-button
         class="px-2 py-1 text-sm font-bold uppercase rounded-md text-begonia-sec-gray bg-begonia-primary-purple hover:bg-purple-200"
       >
@@ -47,6 +47,14 @@ export default Vue.extend({
     }),
     isEmtpyCart () {
       return this.cart.items.length <= 0
+    },
+    hasVariants () {
+      return this.product.variants.length > 0
+    },
+    productLowestPrice () {
+      return this.hasVariants
+        ? Math.min(...this.product.variants.map(({ price }) => price))
+        : this.product.price
     }
   }
 })

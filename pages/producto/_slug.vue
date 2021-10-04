@@ -24,7 +24,7 @@
       </div>
       <div class="flex justify-center">
         <span
-          class="px-4 py-1 text-sm font-bold text-white rounded-full w-max bg-begonia-sec-gray"
+          class="px-4 py-1 text-sm font-bold text-white rounded-full cursor-pointer w-max bg-begonia-sec-gray"
           @click="toggleLongDescriptionVisibility"
         >{{ longDescriptionBadgeText }}</span>
       </div>
