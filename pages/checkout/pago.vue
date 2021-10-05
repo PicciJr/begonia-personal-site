@@ -24,6 +24,13 @@ export default Vue.extend({
     AShippingDataSummary,
     APaypalButton
   },
-  layout: 'checkout'
+  layout: 'checkout',
+  asyncData ({ redirect, store }) {
+    if (store.state.cart.cart.items.length <= 0) {
+      redirect('/tienda')
+    } else if (store.state.cart.cart.status !== 'Addressed') {
+      redirect('/checkout/envio')
+    }
+  }
 })
 </script>

@@ -15,6 +15,6 @@ export enum CartStatus {
 export interface ICart {
   items: IProduct[]
   subtotal: number
-  status: CartStatus
+  status?: CartStatus
   token?: string
 }

@@ -60,6 +60,11 @@ export default Vue.extend({
     MCheckoutNextStepButton
   },
   layout: 'checkout',
+  asyncData ({ store, redirect }) {
+    if (store.state.cart.cart.items.length <= 0 && store.state.cart.cart.status !== 'Completed') {
+      redirect('/tienda')
+    }
+  },
   data () {
     return {
       isValidForm: false

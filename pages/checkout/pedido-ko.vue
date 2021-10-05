@@ -29,6 +29,11 @@ export default {
   components: {
     AButton
   },
-  layout: 'checkout'
+  layout: 'checkout',
+  asyncData ({ redirect, store }) {
+    if (store.state.cart.cart.status !== 'Error') {
+      redirect('/checkout/envio')
+    }
+  }
 }
 </script>

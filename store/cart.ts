@@ -41,9 +41,7 @@ export default class Cart extends VuexModule {
   RESET_CART () {
     this.cart = {
       items: [],
-      subtotal: 0.0,
-      status: null,
-      email: ''
+      subtotal: 0.0
     }
   }
 
@@ -70,6 +68,11 @@ export default class Cart extends VuexModule {
   @Mutation
   UPDATE_PHONENUMBER (phoneNumber) {
     this.shippingAddress.phoneNumber = phoneNumber
+  }
+
+  @Mutation
+  SET_CART_STATUS (status) {
+    this.cart.status = status
   }
 
   @Action
@@ -148,9 +151,13 @@ export default class Cart extends VuexModule {
   @Action
   async setCartAddress () {
     try {
-      await this.store.$apiConnection.put(`cart/${this.cart.token}/address`, {
-        address: this.shippingAddress
-      })
+      const updatedCart = await this.store.$apiConnection.put(
+        `cart/${this.cart.token}/address`,
+        {
+          address: this.shippingAddress
+        }
+      )
+      this.SET_CART(updatedCart.data)
     } catch (err) {}
   }
 
@@ -161,6 +168,7 @@ export default class Cart extends VuexModule {
         `cart/checkout/complete/${this.cart.token}`
       )
       this.RESET_CART()
+      this.SET_CART_STATUS('Completed')
       this.store.$cookies.remove('cartToken')
       return response.data
     } catch (err) {}
@@ -196,6 +204,11 @@ export default class Cart extends VuexModule {
     this.UPDATE_PHONENUMBER(phoneNumber)
   }
 
+  @Action
+  updateCartStatus (status) {
+    this.SET_CART_STATUS(status)
+  }
+
   get cartItemsTotalAmount () {
     return this.cart.items.reduce((acc, item) => {
       return acc + item.amount
@@ -210,9 +223,11 @@ export default class Cart extends VuexModule {
 
   get productVariantInCart () {
     return (variantId) => {
-      return this.cart.items.find(
-        ({ variantSelected }) => variantSelected?.id === variantId ?? false
-      ) ?? null
+      return (
+        this.cart.items.find(
+          ({ variantSelected }) => variantSelected?.id === variantId ?? false
+        ) ?? null
+      )
     }
   }
 }

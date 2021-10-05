@@ -40,8 +40,9 @@ export default {
             })
             .then(() => router.push('/checkout/pedido-ok'))
         },
-        onError (err) {
+        async onError (err) {
           console.log('paypal onError', err)
+          await cartStore.updateCartStatus('Error')
           router.push('/checkout/pedido-ko')
           cartStore.resetCartToInitialStatus()
           throw err
