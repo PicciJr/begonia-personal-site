@@ -18,6 +18,5 @@
     "types": ["@nuxt/types", "@types/node", "@nuxtjs/axios"],
     "noImplicitAny": false
   },
-  // TODO: quitar .vue y .ts, se pone para poder hacer build
   "exclude": ["node_modules", ".nuxt", "dist", "**/*.vue", "**/*.ts"]
 }
