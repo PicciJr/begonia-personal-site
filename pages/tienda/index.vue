@@ -26,6 +26,7 @@ export default {
         products: response.data
       }
     } catch (err) {
+      console.log('error tienda', err)
       app.$bugsnag.notify(new Error('Error tienda', err))
     }
   }
