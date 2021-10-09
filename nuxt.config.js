@@ -63,6 +63,15 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 
+  publicRuntimeConfig: {
+    apiBaseUrl:
+      process.env.API_BASE_URL ||
+      'http://localhost:8000/api-begonia-personal/v1/',
+    paypalClientId: process.env.PAYPAL_CLIENT_ID,
+    bugsnagApiKey:
+      process.env.BUGSNAG_API_KEY || 'cbc77d1ea4c5661e85acb36b01f225cd'
+  },
+
   // runtime eslinting (https://typescript.nuxtjs.org/guide/lint#runtime-lint)
   typescript: {
     typeCheck: {

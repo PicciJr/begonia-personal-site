@@ -1,4 +1,4 @@
-export default function ({ $axios }, inject) {
+export default function ({ $axios, $config }, inject) {
   const api = $axios.create({
     headers: {
       common: {
@@ -7,7 +7,7 @@ export default function ({ $axios }, inject) {
     }
   })
 
-  api.setBaseURL(process.env.API_BASE_URL)
+  api.setBaseURL($config.apiBaseUrl)
 
   // Inject to context as $apiConnection
   inject('apiConnection', api)
