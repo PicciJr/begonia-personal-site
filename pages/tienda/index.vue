@@ -21,7 +21,6 @@ export default {
   layout: 'default',
   async asyncData ({ app }) {
     try {
-      const response = await app.$apiConnection.get('/product/tienda/all')
       console.log(
         'tienda ve',
         app.$apiConnection,
@@ -29,6 +28,7 @@ export default {
         app.$bugsnag,
         process.env.BUGSNAG_API_KEY
       )
+      const response = await app.$apiConnection.get('/product/tienda/all')
       return {
         products: response.data
       }
