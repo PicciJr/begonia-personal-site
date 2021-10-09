@@ -1,6 +1,13 @@
 <template>
-  <div class="flex flex-wrap justify-center px-4 mt-40 mb-8 md:mt-16 text-begonia-sec-gray">
-    <m-product-card v-for="product in products" :key="product.id" :product="product" class="mx-0 mb-32 md:mx-2" />
+  <div
+    class="flex flex-wrap justify-center px-4 mt-40 mb-8 md:mt-16 text-begonia-sec-gray"
+  >
+    <m-product-card
+      v-for="product in products"
+      :key="product.id"
+      :product="product"
+      class="mx-0 mb-32 md:mx-2"
+    />
   </div>
 </template>
 
@@ -19,7 +26,7 @@ export default {
         products: response.data
       }
     } catch (err) {
-
+      app.$bugsnag.notify(new Error('Error tienda', err))
     }
   }
 }

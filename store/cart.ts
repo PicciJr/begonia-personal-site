@@ -91,7 +91,9 @@ export default class Cart extends VuexModule {
         path: '/',
         maxAge: 60 * 60 * 24 * 7
       })
-    } catch (err) {}
+    } catch (err) {
+      this.store.$bugsnag.notify(new Error('Error crear carrito', err))
+    }
   }
 
   @Action

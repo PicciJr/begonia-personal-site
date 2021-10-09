@@ -69,7 +69,9 @@ export default Vue.extend({
       return {
         product
       }
-    } catch (err) {}
+    } catch (err) {
+      app.$bugsnag.notify(new Error('Error tienda', err))
+    }
   },
   data () {
     return {
