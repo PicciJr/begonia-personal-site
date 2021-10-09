@@ -48,7 +48,7 @@
 import Vue from 'vue'
 import AImageCarousel from '@/components/atoms/AImageCarousel.vue'
 // import MCartStickyFooter from '~/components/molecules/MCartStickyFooter.vue'
-import OProductAddToCart from '~/components/molecules/OProductAddToCart.vue'
+import OProductAddToCart from '~/components/organisms/OProductAddToCart.vue'
 // import OSimilarProducts from '~/components/organisms/OSimilarProducts.vue'
 export default Vue.extend({
   name: 'Product',

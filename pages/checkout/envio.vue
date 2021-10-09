@@ -44,8 +44,8 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { cartStore } from '@/store'
 import { mapState } from 'vuex'
+import { cartStore } from '@/store'
 import ACartSummary from '@/components/atoms/ACartSummary.vue'
 import MCartItems from '@/components/molecules/MCartItems.vue'
 import AButton from '~/components/atoms/AButton.vue'

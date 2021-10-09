@@ -31,8 +31,8 @@
 
 <script lang="ts">
 import { mapState, mapGetters } from 'vuex'
-import { cartStore } from '@/store'
 import { IProduct } from 'types/product/index'
+import { cartStore } from '@/store'
 import ADropdownField from '~/components/atoms/ADropdownField.vue'
 import AButton from '~/components/atoms/AButton.vue'
 import MProductInCartSpinner from '~/components/molecules/MProductInCartSpinner.vue'

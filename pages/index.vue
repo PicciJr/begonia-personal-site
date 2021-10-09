@@ -8,8 +8,8 @@
 </template>
 
 <script lang="ts">
-import APortraitImage from '@/components/atoms/APortraitImage.vue'
 import Vue from 'vue'
+import APortraitImage from '@/components/atoms/APortraitImage.vue'
 
 export default Vue.extend({
   components: {

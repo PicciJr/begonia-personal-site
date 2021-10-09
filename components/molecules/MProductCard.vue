@@ -26,9 +26,9 @@
 </template>
 
 <script lang="ts">
+import Vue from 'vue'
 import { mapState } from 'vuex'
 import { cartStore } from '@/store'
-import Vue from 'vue'
 import AButton from '~/components/atoms/AButton.vue'
 export default Vue.extend({
   name: 'MProductCard',

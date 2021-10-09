@@ -23,8 +23,8 @@
 
 <script>
 import { mapState } from 'vuex'
-import { cartStore } from '@/store'
 import AInputTextField from '../atoms/AInputTextField.vue'
+import { cartStore } from '@/store'
 
 export default {
   components: {
