@@ -1,5 +1,3 @@
-// @ts-nocheck
-// TODO: quitar cuando se corrijan los errores de TS
 import { Module, VuexModule, Action, Mutation } from 'vuex-module-decorators'
 import { ICart } from '~/types/cart'
 import { IAddress } from '~/types/address'

@@ -18,5 +18,5 @@
     "types": ["@nuxt/types", "@types/node", "@nuxtjs/axios"],
     "noImplicitAny": false
   },
-  "exclude": ["node_modules", ".nuxt", "dist", "**/*.vue", "**/*.ts"]
+  "exclude": ["node_modules", ".nuxt", "dist"]
 }
