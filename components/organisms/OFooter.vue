@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="flex justify-center">
     <!-- Logos redes -->
     <a-social-media-link
       v-for="item in socialMediaItems"

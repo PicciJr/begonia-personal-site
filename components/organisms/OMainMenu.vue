@@ -2,7 +2,7 @@
 <template>
   <div>
     <!-- Desktop only -->
-    <m-nav-bar-menu :menu-items="menuItems" class="hidden mt-32 md:justify-center md:flex md:items-center" />
+    <m-nav-bar-menu :menu-items="menuItems" class="hidden mt-8 md:justify-center md:flex md:items-center" />
     <!-- Mobile only -->
     <m-foldable-menu
       v-show="isMenuOpen"

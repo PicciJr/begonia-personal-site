@@ -1,6 +1,6 @@
 <!-- Controls how elements are stacked and should look like across the app -->
 <template>
-  <div class="max-w-md mx-auto">
+  <div class="max-w-md mx-auto font-bitter">
     <!-- View content -->
     <Nuxt />
   </div>

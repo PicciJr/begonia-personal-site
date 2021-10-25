@@ -7,7 +7,7 @@
         @decrease-amount="$emit('decrease-amount')"
         @increase-amount="$emit('increase-amount')"
       />
-      <span class="pl-4">
+      <span class="pl-2">
         <strong>Tienes {{ amount }} unidad(es) {{ variantText }}</strong> de
         este producto en tu carrito
       </span>

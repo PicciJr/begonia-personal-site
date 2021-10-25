@@ -8,6 +8,10 @@ module.exports = {
         'begonia-sec-blue': '#C0CFDB',
         'begonia-sec-gray': '#767779'
       }
+    },
+    // custom fonts: assets/css/tailwind.css
+    fontFamily: {
+      bitter: ['Bitter']
     }
   },
   variants: {},

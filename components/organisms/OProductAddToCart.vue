@@ -23,7 +23,7 @@
     <!-- Add to cart -->
     <a-button
       :cta-text="ctaButtonText"
-      class="w-full px-4 py-2 uppercase bg-begonia-primary-purple hover:bg-purple-200"
+      :class="['w-full px-4 py-2 uppercase', addToCartStyle]"
       @click="handleMainButtonAction"
     />
   </div>
@@ -72,6 +72,9 @@ export default {
         this.variantInCart(this.selectedVariant?.id) !== null ??
         false
       )
+    },
+    addToCartStyle () {
+      return this.isProductInCartAlready ? 'bg-purple-400 text-white' : 'bg-begonia-primary-purple hover:bg-purple-200'
     },
     isProductInCartAlready () {
       if (!this.hasVariants) {
