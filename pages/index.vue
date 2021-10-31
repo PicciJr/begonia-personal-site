@@ -4,7 +4,7 @@
     <!-- Main image -->
     <a-portrait-image :img-src="mainImgSrc" class="w-full portrait-image" />
     <!-- Main logo -->
-    <img :src="logoHome" alt="Begonia Ilustraciones" class="h-48 mx-auto">
+    <img :src="logoHome" alt="Begonia Ilustraciones" class="h-48 mx-auto -mt-12">
   </div>
 </template>
 

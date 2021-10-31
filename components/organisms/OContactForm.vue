@@ -28,7 +28,7 @@
       name=""
       cols="30"
       class="w-full text-sm rounded-md border-begonia-primary-gray"
-      placeholder="Dinos qué te gustaría saber..."
+      placeholder="Dime qué te gustaría saber..."
     />
     <a-button
       cta-text="Quiero más información"
@@ -85,7 +85,7 @@ export default Vue.extend({
     },
     isValidName () {
       if (!this.name) {
-        this.errorMessage.name = 'Por favor, indícanos tu nombre'
+        this.errorMessage.name = 'Por favor, indícame tu nombre'
         return false
       } else {
         this.errorMessage.name = ''

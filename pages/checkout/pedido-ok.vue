@@ -14,11 +14,11 @@
     </h2>
     <div class="px-8 space-y-3 md:space-y-6">
       <p>
-        &#x1F4E6; Estamos preparando minuciosa y cariñosamente tu encargo para que esté en
+        &#x1F4E6; Estoy preparando minuciosa y cariñosamente tu encargo para que esté en
         tus manos lo antes posible.
       </p>
       <p>
-        &#x1F4E9; Recibirás un email de confirmación en los próximos minutos donde te iremos
+        &#x1F4E9; Recibirás un email de confirmación en los próximos minutos donde te iré
         informando sobre el estado del envío.
       </p>
     </div>
