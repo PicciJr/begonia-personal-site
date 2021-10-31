@@ -3,24 +3,45 @@
 @tailwind utilities;
 
 @layer base {
-    @font-face {
-      font-family: 'Bitter';
-      font-weight: 400;
-      src: url('../fonts/Bitter/Bitter-Regular.ttf') format('woff');
-    }
-    @font-face {
-      font-family: 'Bitter';
-      font-weight: 500;
-      src: url('../fonts/Bitter/Bitter-Medium.ttf') format('woff');
-    }
-    @font-face {
-      font-family: 'Bitter';
-      font-weight: 600;
-      src: url('../fonts/Bitter/Bitter-SemiBold.ttf') format('woff');
-    }
-    @font-face {
-      font-family: 'Bitter';
-      font-weight: 700;
-      src: url('../fonts/Bitter/Bitter-Bold.ttf') format('woff');
-    }
+  @font-face {
+    font-family: 'Bitter';
+    font-weight: 400;
+    src: url('../fonts/Bitter/Bitter-Regular.ttf') format('woff');
+  }
+  @font-face {
+    font-family: 'Bitter';
+    font-weight: 500;
+    src: url('../fonts/Bitter/Bitter-Medium.ttf') format('woff');
+  }
+  @font-face {
+    font-family: 'Bitter';
+    font-weight: 600;
+    src: url('../fonts/Bitter/Bitter-SemiBold.ttf') format('woff');
+  }
+  @font-face {
+    font-family: 'Bitter';
+    font-weight: 700;
+    src: url('../fonts/Bitter/Bitter-Bold.ttf') format('woff');
+  }
+
+  /**
+    Sobrescribir estilos que tailwind aplica a contenido HTML que no tiene las clases inline 
+    Útil para el contenido que llega de fuera y se inserta (como CMS) */
+  h2 {
+    @apply text-xl;
+  }
+
+  h3 {
+    @apply text-lg;
+  }
+
+  h4 {
+    @apply text-base;
+  }
+
+  ul {
+    @apply list-disc;
+  }
+
+  /** Fin sobrescritura estilos de tailwind */
 }

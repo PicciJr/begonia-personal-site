@@ -57,8 +57,18 @@ export default {
           apiKey: process.env.BUGSNAG_API_KEY
         }
       }
-    ]
+    ],
+    // https://github.com/nuxt-community/markdownit-module
+    '@nuxtjs/markdownit'
   ],
+  markdownit: {
+    runtime: true, // Support `$md()`
+    preset: 'default',
+    linkify: true,
+    breaks: true,
+    injected: true,
+    html: true
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},

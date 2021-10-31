@@ -27,7 +27,7 @@ export default Vue.extend({
     return {
       menuItems: [
         {
-          title: 'Sobre mi',
+          title: 'Sobre mí',
           linkTo: '/sobre-mi'
         },
         {

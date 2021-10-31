@@ -5,7 +5,7 @@
   >
     <!-- Profile image -->
     <div
-      style="background-image: url(https://res.cloudinary.com/dhmap69lg/image/upload/v1633257380/begonia-personal/sobre-mi/IMG-20210227-WA0014_1_zuxy0y.jpg)"
+      style="background-image: url(https://res.cloudinary.com/dhmap69lg/image/upload/v1635517628/begonia-personal/sobre-mi/imagen-sobremi-mejorada_ka4msi.jpg)"
       class="w-64 h-64 mt-8 bg-no-repeat bg-cover rounded-full"
     />
     <!-- Biography text -->
@@ -26,7 +26,7 @@
         gusta, observar mi mundo, he ido ganando soltura y experiencia en la
         pintura. Sobre todo en técnicas como la acuarela, la pintura acrílica y
         el óleo. Actualmente desde mi pequeño estudio realizo obras tanto
-        personales como encargos para otras personas como retratos o pinturas
+        personales como encargos para otras personas así como retratos o pinturas
         personalizadas.
       </p>
       <p>

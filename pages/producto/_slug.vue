@@ -19,9 +19,10 @@
       <h3 class="mb-4 text-xl font-bold md:text-3xl">
         Descripción
       </h3>
-      <div :class="['mb-4 overflow-hidden', longDescriptionHeight]">
+      <!-- <div :class="['mb-4 overflow-hidden', longDescriptionHeight]">
         {{ product.longDescription }}
-      </div>
+      </div> -->
+      <div class="px-2" v-html="$md.render(product.longDescription)" />
       <div class="flex justify-center">
         <span
           class="px-4 py-1 text-sm font-bold text-white rounded-full cursor-pointer w-max bg-begonia-sec-gray"
