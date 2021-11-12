@@ -14,7 +14,7 @@ export default Vue.extend({
   },
   computed: {
     imgStyle () : string {
-      return `background-image: url(${this.imgSrc}); background-size: contain; background-position: center; background-repeat: no-repeat; margin-top: 6rem;`
+      return `background-image: url(${this.imgSrc}); background-size: contain; background-position: center; background-repeat: no-repeat; margin-top: 2rem;`
     }
   }
 })

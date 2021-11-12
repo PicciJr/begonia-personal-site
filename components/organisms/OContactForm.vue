@@ -28,10 +28,10 @@
       name=""
       cols="30"
       class="w-full text-sm rounded-md border-begonia-primary-gray"
-      placeholder="Dime qué te gustaría saber..."
+      :placeholder="commentPlaceholderText"
     />
     <a-button
-      cta-text="Quiero más información"
+      :cta-text="ctaText"
       class="w-full px-4 py-1 text-lg bg-begonia-primary-purple hover:bg-purple-200"
       @click="checkFormValidity"
     />
@@ -47,6 +47,16 @@ export default Vue.extend({
     AButton,
     AInputTextField
   },
+  props: {
+    commentPlaceholderText: {
+      type: String,
+      default: 'Dime qué te gustaría saber...'
+    },
+    ctaText: {
+      type: String,
+      default: 'Quiero más información'
+    }
+  },
   data () {
     return {
       name: null,
@@ -61,7 +71,11 @@ export default Vue.extend({
   methods: {
     checkFormValidity () {
       if (this.isValidEmail() && this.isValidName()) {
-        this.$emit('form-ok')
+        this.$emit('form-ok', {
+          email: this.email,
+          name: this.name,
+          comment: this.comment
+        })
       }
     },
     updateEmail (event) {

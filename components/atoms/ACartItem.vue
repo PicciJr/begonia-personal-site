@@ -14,6 +14,7 @@
       </nuxt-link>
       <div class="flex items-center justify-between space-x-3">
         <a-spinner-field
+          v-show="isBuyableProduct"
           :amount="product.amount"
           @decrease-amount="decreaseAmount"
           @increase-amount="increaseAmount"
@@ -26,6 +27,7 @@
     </div>
     <!-- Delete product button -->
     <svg-icon
+      v-show="isBuyableProduct"
       name="close-circle"
       class="absolute w-6 h-6 cursor-pointer fill-current -top-2 -right-2 text-begonia-primary-purple"
       @click="$emit('remove-product', product)"
@@ -68,6 +70,9 @@ export default Vue.extend({
       return this.product.variants.find(
         ({ id }) => id === this.product?.variantSelected?.id
       )?.price
+    },
+    isBuyableProduct () {
+      return this.product.type !== 'Encargo'
     }
   },
   methods: {

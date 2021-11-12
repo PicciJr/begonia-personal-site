@@ -13,7 +13,15 @@
       {{ product.title }}
     </h3>
     <!-- Add to cart management -->
-    <o-product-add-to-cart :product="product" class="mb-4" />
+    <o-product-add-to-cart v-if="isBuyableProduct" :product="product" class="mb-4" />
+    <!-- Send to form -->
+    <div v-else class="flex justify-center">
+      <a-button
+        cta-text="Me interesa"
+        class="w-64 px-4 py-1 mb-4 text-lg uppercase bg-begonia-primary-purple hover:bg-purple-200"
+        @click="$router.push(`/contacto-encargo/${product.slug}`)"
+      />
+    </div>
     <!-- Product description -->
     <div class="mb-16">
       <h3 class="mb-4 text-xl font-bold md:text-3xl">
@@ -23,7 +31,7 @@
         {{ product.longDescription }}
       </div> -->
       <div class="px-2" v-html="$md.render(product.longDescription)" />
-      <div class="flex justify-center">
+      <div v-if="isDescriptionVeryLong" class="flex justify-center">
         <span
           class="px-4 py-1 text-sm font-bold text-white rounded-full cursor-pointer w-max bg-begonia-sec-gray"
           @click="toggleLongDescriptionVisibility"
@@ -48,6 +56,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import AImageCarousel from '@/components/atoms/AImageCarousel.vue'
+import AButton from '@/components/atoms/AButton.vue'
 // import MCartStickyFooter from '~/components/molecules/MCartStickyFooter.vue'
 import OProductAddToCart from '~/components/organisms/OProductAddToCart.vue'
 // import OSimilarProducts from '~/components/organisms/OSimilarProducts.vue'
@@ -55,6 +64,7 @@ export default Vue.extend({
   name: 'Product',
   components: {
     AImageCarousel,
+    AButton,
     // MCartStickyFooter,
     OProductAddToCart
     // OSimilarProducts
@@ -85,6 +95,12 @@ export default Vue.extend({
     },
     longDescriptionBadgeText (): string {
       return this.isLongDescriptionVisible ? 'Leer menos' : 'Leer más'
+    },
+    isBuyableProduct () {
+      return this.product.type !== 'Encargo'
+    },
+    isDescriptionVeryLong () {
+      return this.product.longDescription.length > 500
     }
   },
   methods: {

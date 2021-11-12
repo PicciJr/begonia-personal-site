@@ -13,6 +13,7 @@ import Vue from 'vue'
 import APortraitImage from '@/components/atoms/APortraitImage.vue'
 
 export default Vue.extend({
+  name: 'Home',
   components: {
     APortraitImage
   },
