@@ -10,7 +10,7 @@
     </nuxt-link>
     <div class="flex flex-col justify-between pl-4">
       <nuxt-link :to="`/producto/${product.slug}`" class="space-x-1">
-        <span>{{ product.title }}</span><span v-if="hasVariants" class="text-xs">({{ variantInfo }})</span>
+        <span class="text-sm">{{ product.title }}</span><span v-if="hasVariants" class="text-xs">({{ variantInfo }})</span>
       </nuxt-link>
       <div class="flex items-center justify-between space-x-3">
         <a-spinner-field

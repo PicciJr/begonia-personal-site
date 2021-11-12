@@ -2,15 +2,15 @@
 <template>
   <nuxt-link
     :to="`/producto/${product.slug}`"
-    class="relative flex items-end justify-center w-64 h-56 py-1 rounded-md shadow-xl md:w-56 md:h-64 hover:shadow-2xl"
+    class="relative flex items-end justify-center w-64 h-56 py-3 rounded-md shadow-xl md:w-56 md:h-64 hover:shadow-2xl"
   >
     <img
       :src="product.images[0].url"
       alt=""
       class="absolute top-0 h-48 rounded-md shadow-md left-1/2 productCardImage"
     >
-    <div class="flex flex-col items-center p-2 space-y-1">
-      <h3 class="font-medium text-md">
+    <div class="flex flex-col items-center px-8 space-y-1 text-center">
+      <h3 class="text-base font-medium">
         {{ product.title }}
       </h3>
       <span

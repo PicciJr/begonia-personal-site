@@ -2,6 +2,7 @@
 <template>
   <div class="max-w-md px-4 mx-auto mt-16 mb-8 text-begonia-sec-gray">
     <div v-if="!isValidForm">
+      <a-info-message class="mb-12" info-message="Los encargos no se incluyen dentro del carrito de la tienda." />
       <p class="mb-4 font-bold text-center text-md">
         Quisiera hacer un encargo
       </p>
@@ -31,11 +32,13 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import AInfoMessage from '~/components/atoms/AInfoMessage.vue'
 import AButton from '~/components/atoms/AButton.vue'
 import ACartItem from '~/components/atoms/ACartItem.vue'
 import OContactForm from '~/components/organisms/OContactForm.vue'
 export default Vue.extend({
   components: {
+    AInfoMessage,
     AButton,
     ACartItem,
     OContactForm

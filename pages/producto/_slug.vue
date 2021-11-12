@@ -30,7 +30,7 @@
       <!-- <div :class="['mb-4 overflow-hidden', longDescriptionHeight]">
         {{ product.longDescription }}
       </div> -->
-      <div class="px-2" v-html="$md.render(product.longDescription)" />
+      <div :class="['px-2', longDescriptionBehaviour]" v-html="$md.render(product.longDescription)" />
       <div v-if="isDescriptionVeryLong" class="flex justify-center">
         <span
           class="px-4 py-1 text-sm font-bold text-white rounded-full cursor-pointer w-max bg-begonia-sec-gray"
@@ -90,8 +90,8 @@ export default Vue.extend({
     }
   },
   computed: {
-    longDescriptionHeight (): string {
-      return this.isLongDescriptionVisible ? 'h-full' : 'h-20'
+    longDescriptionBehaviour (): string {
+      return !this.isDescriptionVeryLong || (this.isDescriptionVeryLong && this.isLongDescriptionVisible) ? 'h-full' : 'h-20 overflow-hidden'
     },
     longDescriptionBadgeText (): string {
       return this.isLongDescriptionVisible ? 'Leer menos' : 'Leer más'

@@ -14,7 +14,7 @@
     <!-- View content -->
     <Nuxt class="relative z-20" />
     <!-- Footer -->
-    <o-footer :class="['absolute bottom-0 w-full mx-auto h-8', distanceToFooter]" />
+    <o-footer :class="['absolute bottom-0 w-full mx-auto h-8 z-50', distanceToFooter]" />
   </div>
 </template>
 
