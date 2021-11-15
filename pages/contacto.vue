@@ -35,8 +35,13 @@ export default Vue.extend({
     }
   },
   methods: {
-    submitFormData () {
+    async submitFormData ({ email, name, comment }) {
       this.isValidForm = true
+      await this.$apiConnection.post('/mail/contacto', {
+        email,
+        name,
+        longDescription: comment
+      })
     }
   }
 })
