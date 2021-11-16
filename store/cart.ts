@@ -179,6 +179,7 @@ export default class Cart extends VuexModule {
   @Action
   resetCartToInitialStatus () {
     this.RESET_CART()
+    this.store.$cookies.remove('cartToken')
   }
 
   @Action

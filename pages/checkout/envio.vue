@@ -28,7 +28,11 @@
     </div>
     <!-- Empty cart -->
     <div v-else class="flex flex-col justify-center space-y-4">
-      <svg-icon name="shopping-cart" class="self-center w-32 h-32 fill-current text-begonia-sec-gray" @click="toggleMenuStatus" />
+      <svg-icon
+        name="shopping-cart"
+        class="self-center w-32 h-32 fill-current text-begonia-sec-gray"
+        @click="toggleMenuStatus"
+      />
       <p>
         No tienes productos en tu carrito.
       </p>
@@ -60,8 +64,16 @@ export default Vue.extend({
     MCheckoutNextStepButton
   },
   layout: 'checkout',
-  asyncData ({ store, redirect }) {
-    if (store.state.cart.cart.items.length <= 0 && store.state.cart.cart.status !== 'Completed') {
+  async asyncData ({ store, redirect, app }) {
+    // force check on cart status
+    // axios interceptor will check if valid token
+    await app.$apiConnection.get(
+      `/cart/${store.state.cart.cart.token}`
+    )
+    if (
+      store.state.cart.cart.items.length <= 0 &&
+      store.state.cart.cart.status !== 'Completed'
+    ) {
       redirect('/tienda')
     }
   },
