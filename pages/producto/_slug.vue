@@ -13,7 +13,11 @@
       {{ product.title }}
     </h3>
     <!-- Add to cart management -->
-    <o-product-add-to-cart v-if="isBuyableProduct" :product="product" class="mb-4" />
+    <o-product-add-to-cart
+      v-if="isBuyableProduct"
+      :product="product"
+      class="mb-4"
+    />
     <!-- Send to form -->
     <div v-else class="flex justify-center">
       <a-button
@@ -27,10 +31,10 @@
       <h3 class="mb-4 text-xl font-bold md:text-3xl">
         Descripción
       </h3>
-      <!-- <div :class="['mb-4 overflow-hidden', longDescriptionHeight]">
-        {{ product.longDescription }}
-      </div> -->
-      <div :class="['px-2', longDescriptionBehaviour]" v-html="$md.render(product.longDescription)" />
+      <div
+        :class="['px-2', longDescriptionBehaviour]"
+        v-html="$md.render(product.longDescription)"
+      />
       <div v-if="isDescriptionVeryLong" class="flex justify-center">
         <span
           class="px-4 py-1 text-sm font-bold text-white rounded-full cursor-pointer w-max bg-begonia-sec-gray"
@@ -39,11 +43,7 @@
       </div>
     </div>
     <!-- Related products -->
-    <!-- TODO: reactivar -->
-    <!-- <o-similar-products
-      class="mt-8"
-      :similar-products="product.similarProducts"
-    /> -->
+    <o-similar-products class="mt-8" :similar-products="relatedProducts" />
     <!-- Sticky footer Add to cart -->
     <!-- TODO: que el sticky footer importe la logica del oproductaddtocart para no duplicar -->
     <!-- <m-cart-sticky-footer
@@ -59,15 +59,16 @@ import AImageCarousel from '@/components/atoms/AImageCarousel.vue'
 import AButton from '@/components/atoms/AButton.vue'
 // import MCartStickyFooter from '~/components/molecules/MCartStickyFooter.vue'
 import OProductAddToCart from '~/components/organisms/OProductAddToCart.vue'
-// import OSimilarProducts from '~/components/organisms/OSimilarProducts.vue'
+import { IProduct } from '~/types/product'
+import OSimilarProducts from '~/components/organisms/OSimilarProducts.vue'
 export default Vue.extend({
   name: 'Product',
   components: {
     AImageCarousel,
     AButton,
     // MCartStickyFooter,
-    OProductAddToCart
-    // OSimilarProducts
+    OProductAddToCart,
+    OSimilarProducts
   },
   layout: 'default',
   async asyncData ({ app, route }) {
@@ -77,11 +78,21 @@ export default Vue.extend({
         `/product/slug/${productSlug}`
       )
       const product = response.data
+      const relatedProducts: IProduct[] = []
+      if (product.relatedProducts) {
+        for (const relatedProduct of product.relatedProducts) {
+          const response = await app.$apiConnection.get(
+            `/product/${relatedProduct[0].id}`
+          )
+          relatedProducts.push(response.data)
+        }
+      }
       return {
-        product
+        product,
+        relatedProducts
       }
     } catch (err) {
-      app.$bugsnag.notify(new Error('Error tienda', err))
+      app.$bugsnag.notify(new Error('Error ficha producto', err))
     }
   },
   data () {
@@ -91,7 +102,10 @@ export default Vue.extend({
   },
   computed: {
     longDescriptionBehaviour (): string {
-      return !this.isDescriptionVeryLong || (this.isDescriptionVeryLong && this.isLongDescriptionVisible) ? 'h-full' : 'h-20 overflow-hidden'
+      return !this.isDescriptionVeryLong ||
+        (this.isDescriptionVeryLong && this.isLongDescriptionVisible)
+        ? 'h-full'
+        : 'h-20 overflow-hidden'
     },
     longDescriptionBadgeText (): string {
       return this.isLongDescriptionVisible ? 'Leer menos' : 'Leer más'
