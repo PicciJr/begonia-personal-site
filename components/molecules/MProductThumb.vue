@@ -9,7 +9,7 @@
     <h3 class="mb-2 text-sm font-extrabold sm:text-md">
       {{ product.title }}
     </h3>
-    <span class="mb-2 text-xs">{{ product.price }} €</span>
+    <span class="mb-2 text-xs">{{ product.price | formatToEuroCurrency }}</span>
     <span
       class="px-2 py-1 text-sm font-bold text-center uppercase rounded-full text-begonia-sec-gray bg-begonia-primary-purple hover:bg-purple-200"
     >Ver producto</span>
