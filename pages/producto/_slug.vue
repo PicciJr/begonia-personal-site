@@ -43,7 +43,7 @@
       </div>
     </div>
     <!-- Related products -->
-    <o-similar-products class="mt-8" :similar-products="relatedProducts" />
+    <o-similar-products v-if="hasRelatedProducts" class="mt-8" :similar-products="relatedProducts" />
     <!-- Sticky footer Add to cart -->
     <!-- TODO: que el sticky footer importe la logica del oproductaddtocart para no duplicar -->
     <!-- <m-cart-sticky-footer
@@ -115,6 +115,9 @@ export default Vue.extend({
     },
     isDescriptionVeryLong () {
       return this.product.longDescription.length > 500
+    },
+    hasRelatedProducts () {
+      return this.relatedProducts.length > 0
     }
   },
   methods: {
