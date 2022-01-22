@@ -13,7 +13,17 @@
       <h3 class="text-base font-medium">
         {{ product.title }}
       </h3>
+      <!-- Precio -->
+      <div
+        v-if="hasRangeInPricing"
+        class="mb-2 font-bold text-md md:text-lg"
+      >
+        {{ product.minPrice | formatToEuroCurrency }}
+        <span class="px-1 text-xs font-medium">-</span>
+        {{ product.maxPrice | formatToEuroCurrency }}
+      </div>
       <span
+        v-else
         class="mb-2 font-bold text-md md:text-lg"
       ><span class="text-xs font-medium">desde</span> {{ productLowestPrice | formatToEuroCurrency }}</span>
       <a-button
@@ -30,6 +40,7 @@ import Vue from 'vue'
 import { mapState } from 'vuex'
 import { cartStore } from '@/store'
 import AButton from '~/components/atoms/AButton.vue'
+import { IProduct } from '~/types/product'
 export default Vue.extend({
   name: 'MProductCard',
   components: {
@@ -37,7 +48,7 @@ export default Vue.extend({
   },
   props: {
     product: {
-      type: Object,
+      type: Object as () => IProduct,
       default: null
     }
   },
@@ -55,6 +66,9 @@ export default Vue.extend({
       return this.hasVariants
         ? Math.min(...this.product.variants.map(({ price }) => price))
         : this.product.price
+    },
+    hasRangeInPricing () {
+      return this.product.minPrice !== null && this.product.maxPrice !== null
     }
   }
 })

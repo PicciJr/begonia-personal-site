@@ -18,8 +18,13 @@
       :product="product"
       class="mb-4"
     />
-    <!-- Send to form -->
-    <div v-else class="flex justify-center">
+    <!-- Price & Send to form -->
+    <div v-else class="flex flex-col justify-center">
+      <a-price-range
+        v-if="hasRangeInPricing"
+        :product="product"
+        class="mb-2"
+      />
       <a-button
         cta-text="Me interesa"
         class="w-64 px-4 py-1 mb-4 text-lg uppercase bg-begonia-primary-purple hover:bg-purple-200"
@@ -57,6 +62,7 @@
 import Vue from 'vue'
 import AImageCarousel from '@/components/atoms/AImageCarousel.vue'
 import AButton from '@/components/atoms/AButton.vue'
+import APriceRange from '@/components/atoms/APriceRange.vue'
 // import MCartStickyFooter from '~/components/molecules/MCartStickyFooter.vue'
 import OProductAddToCart from '~/components/organisms/OProductAddToCart.vue'
 import { IProduct } from '~/types/product'
@@ -66,6 +72,7 @@ export default Vue.extend({
   components: {
     AImageCarousel,
     AButton,
+    APriceRange,
     // MCartStickyFooter,
     OProductAddToCart,
     OSimilarProducts
@@ -118,6 +125,9 @@ export default Vue.extend({
     },
     hasRelatedProducts () {
       return this.relatedProducts.length > 0
+    },
+    hasRangeInPricing () {
+      return this.product.minPrice !== null && this.product.maxPrice !== null
     }
   },
   methods: {
