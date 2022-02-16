@@ -20,9 +20,12 @@
           @decrease-amount="decreaseAmount"
           @increase-amount="increaseAmount"
         />
-        <div class="space-x-1">
+        <div v-if="isBuyableProduct" class="space-x-1">
           <span class="font-bold">{{ priceSelected | formatToEuroCurrency }}</span>
           <span class="text-xs italic font-medium">(unidad)</span>
+        </div>
+        <div v-else-if="!isBuyableProduct">
+          {{ product.minPrice | formatToEuroCurrency }} - {{ product.maxPrice | formatToEuroCurrency }}
         </div>
       </div>
     </div>
