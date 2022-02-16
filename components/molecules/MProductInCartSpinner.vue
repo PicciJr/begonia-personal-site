@@ -3,6 +3,7 @@
     <!-- Amounts -->
     <div class="flex items-center mt-6">
       <a-spinner-field
+        v-if="!isCustomizableProduct"
         :amount="amount"
         @decrease-amount="$emit('decrease-amount')"
         @increase-amount="$emit('increase-amount')"
@@ -35,6 +36,10 @@ export default Vue.extend({
     amount: {
       type: Number,
       default: 1
+    },
+    isCustomizableProduct: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {

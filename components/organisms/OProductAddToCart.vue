@@ -16,10 +16,12 @@
       :amount="amount"
       :product="product"
       :selected-variant="selectedVariant"
+      :is-customizable-product="isCustomizableProduct"
       @decrease-amount="handleDecreaseAmount"
       @increase-amount="increaseProductAmount"
     />
-    <!-- TODO: Opciones -->
+    <!-- Opciones de personalizacion -->
+    <m-horoscope-customization v-if="isHoroscopeProduct" :product="product" @horoscope-selected="updateProductOptionsSelected" />
     <!-- Add to cart -->
     <a-button
       :cta-text="ctaButtonText"
@@ -36,13 +38,15 @@ import { cartStore } from '@/store'
 import ADropdownField from '~/components/atoms/ADropdownField.vue'
 import AButton from '~/components/atoms/AButton.vue'
 import MProductInCartSpinner from '~/components/molecules/MProductInCartSpinner.vue'
+import MHoroscopeCustomization from '~/components/molecules/MHoroscopeCustomization.vue'
 
 export default {
   name: 'OProductAddToCart',
   components: {
     ADropdownField,
     AButton,
-    MProductInCartSpinner
+    MProductInCartSpinner,
+    MHoroscopeCustomization
   },
   props: {
     product: {
@@ -53,7 +57,7 @@ export default {
   data () {
     return {
       selectedVariant: null,
-      selectedOption: null
+      selectedOptions: null
     }
   },
   computed: {
@@ -81,6 +85,11 @@ export default {
         return typeof this.productInCart(this.product.id) !== 'undefined'
       }
       return this.isVariantInCart
+    },
+    isCustomizableProduct () {
+      // Funcion que podria actuar como hub de otras posibles opciones
+      // de configuracion futuras
+      return this.isHoroscopeProduct
     },
     amount () {
       if (!this.hasVariants) {
@@ -110,6 +119,9 @@ export default {
       return this.product.variants.find(
         ({ id }) => id === this.selectedVariant.id
       )?.price
+    },
+    isHoroscopeProduct () {
+      return this.product.customHoroscopes.length > 0
     }
   },
   created () {
@@ -118,17 +130,22 @@ export default {
     }
   },
   methods: {
+    updateProductOptionsSelected (options) {
+      this.selectedOptions = options
+    },
     async addToCart () {
       if (this.isEmtpyCart) {
         await cartStore.createCart({
           productId: this.product.id,
           variantId: this.selectedVariant?.id ?? null,
+          options: this.selectedOptions,
           quantity: 1
         })
       } else {
         await cartStore.addCartItem({
           productId: this.product.id,
           variantId: this.selectedVariant?.id ?? null,
+          options: this.selectedOptions,
           quantity: 1
         })
       }

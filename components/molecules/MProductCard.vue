@@ -25,7 +25,7 @@
       <span
         v-else
         class="mb-2 font-bold text-md md:text-lg"
-      ><span class="text-xs font-medium">desde</span> {{ productLowestPrice | formatToEuroCurrency }}</span>
+      ><span v-if="hasMultipleVariants" class="text-xs font-medium">desde</span> {{ productLowestPrice | formatToEuroCurrency }}</span>
       <a-button
         class="px-2 py-1 text-sm font-bold uppercase rounded-md text-begonia-sec-gray bg-begonia-primary-purple hover:bg-purple-200"
       >
@@ -61,6 +61,9 @@ export default Vue.extend({
     },
     hasVariants () {
       return this.product.variants.length > 0
+    },
+    hasMultipleVariants () {
+      return this.product.variants.length > 1
     },
     productLowestPrice () {
       return this.hasVariants

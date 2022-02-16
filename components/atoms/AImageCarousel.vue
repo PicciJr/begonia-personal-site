@@ -6,7 +6,7 @@
     :autoplay="autoplay"
   >
     <vue-glide-slide v-for="image in product.images" :key="image.id">
-      <img :src="image.formats.medium.url" alt="" class="rounded-lg">
+      <img :src="imageSourceResolver(image)" alt="" class="rounded-lg">
     </vue-glide-slide>
     <template slot="control">
       <div class="relative w-full pt-2 text-center">
@@ -54,6 +54,11 @@ export default Vue.extend({
   data () {
     return {
       activeSlide: -1
+    }
+  },
+  methods: {
+    imageSourceResolver (image) {
+      return image.formats?.medium?.url || image.formats?.small?.url
     }
   }
 })

@@ -76,11 +76,12 @@ export default class Cart extends VuexModule {
   }
 
   @Action
-  async createCart ({ productId, variantId = null, quantity }) {
+  async createCart ({ productId, variantId = null, options = null, quantity }) {
     try {
       const newCart = await this.store.$apiConnection.post('cart', {
         productId,
         variantId,
+        options,
         quantity
       })
       this.SET_CART(newCart.data)
@@ -111,11 +112,11 @@ export default class Cart extends VuexModule {
   }
 
   @Action
-  async addCartItem ({ productId, variantId = null, quantity }) {
+  async addCartItem ({ productId, variantId = null, options = null, quantity }) {
     try {
       const updatedCart = await this.store.$apiConnection.post(
         `cart/${this.cart.token}/${productId}`,
-        { variantId, quantity }
+        { variantId, options, quantity }
       )
       this.SET_CART(updatedCart.data)
     } catch (err) {}

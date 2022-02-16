@@ -9,12 +9,13 @@
       >
     </nuxt-link>
     <div class="flex flex-col justify-between pl-4">
-      <nuxt-link :to="`/producto/${product.slug}`" class="space-x-1">
-        <span class="text-sm">{{ product.title }}</span><span v-if="hasVariants" class="text-xs">({{ variantInfo }})</span>
+      <nuxt-link :to="`/producto/${product.slug}`" class="space-x-1 text-sm">
+        <span>{{ product.title }}</span><span v-if="hasVariants" class="text-xs">({{ variantInfo }})</span>
+        <span v-if="isCustomizableProduct" class="font-bold">{{ customOptionsSelected }}</span>
       </nuxt-link>
       <div class="flex items-center justify-between space-x-3">
         <a-spinner-field
-          v-show="isBuyableProduct"
+          v-show="isBuyableProduct && !isCustomizableProduct"
           :amount="product.amount"
           @decrease-amount="decreaseAmount"
           @increase-amount="increaseAmount"
@@ -73,6 +74,16 @@ export default Vue.extend({
     },
     isBuyableProduct () {
       return this.product.type !== 'Encargo'
+    },
+    isCustomizableProduct () {
+      return this.isHoroscopeProduct
+    },
+    isHoroscopeProduct () {
+      return this.product.customHoroscopes.length > 0
+    },
+    customOptionsSelected () {
+      if (this.isHoroscopeProduct) { return `${this.product.customOptionSelected.firstHand} + ${this.product.customOptionSelected.secondHand}` }
+      return null
     }
   },
   methods: {
