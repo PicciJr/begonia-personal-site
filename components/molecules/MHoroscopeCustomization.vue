@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col">
-    <span class="mb-2">Mano 1</span>
+    <span class="mb-2">Mano ella &#128105;</span>
     <a-dropdown-field
       v-model="selectedHoroscopeFirstHand"
       class="mb-2"
@@ -8,7 +8,7 @@
       :selected-option="selectedHoroscopeFirstHand"
       @change="updateHoroscopeSelectedFirstHand"
     />
-    <span class="mb-2">Mano 2</span>
+    <span class="mb-2">Mano él &#128104;</span>
     <a-dropdown-field
       v-model="selectedHoroscopeSecondHand"
       class="mb-2"
