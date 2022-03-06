@@ -1,8 +1,8 @@
 <template>
   <div class="flex flex-col">
-    <div class="flex mb-2 space-x-2">
+    <div class="flex mb-2 space-x-3">
       <span>Mano</span>
-      <div class="flex space-x-1">
+      <div class="flex space-x-6">
         <a-input-radio-button group="primera-mano" option="ella" :checked="firstHandGender === 'ella'" @change="updateFirstHandGender" />
         <a-input-radio-button group="primera-mano" option="él" :checked="firstHandGender === 'él'" @change="updateFirstHandGender" />
       </div>
@@ -14,9 +14,9 @@
       :selected-option="selectedHoroscopeFirstHand"
       @change="updateHoroscopeSelectedFirstHand"
     />
-    <div class="flex mb-2 space-x-2">
+    <div class="flex mb-2 space-x-3">
       <span>Mano</span>
-      <div class="flex space-x-1">
+      <div class="flex space-x-6">
         <a-input-radio-button group="segunda-mano" option="ella" :checked="secondHandGender === 'ella'" @change="updateSecondHandGender" />
         <a-input-radio-button group="segunda-mano" option="él" :checked="secondHandGender === 'él'" @change="updateSecondHandGender" />
       </div>
