@@ -7,7 +7,8 @@
     <img
       :src="product.images[0].url"
       alt=""
-      class="absolute top-0 h-48 rounded-md shadow-md left-1/2 productCardImage"
+      class="absolute top-0 rounded-md shadow-md max-h-40 left-1/2 productCardImage"
+      loading="lazy"
     >
     <div class="flex flex-col items-center px-8 space-y-1 text-center">
       <h3 class="text-base font-medium">

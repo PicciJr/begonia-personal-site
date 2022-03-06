@@ -1,12 +1,18 @@
 <template>
-  <div class="flex justify-center">
-    <!-- Logos redes -->
-    <a-social-media-link
-      v-for="item in socialMediaItems"
-      :key="item.id"
-      :item="item"
-      class="mx-4"
-    />
+  <div>
+    <div class="flex justify-center">
+      <!-- Logos redes -->
+      <a-social-media-link
+        v-for="item in socialMediaItems"
+        :key="item.id"
+        :item="item"
+        class="mx-4"
+      />
+    </div>
+    <!-- Politica privacidad -->
+    <nuxt-link to="/politica-privacidad" class="flex justify-center py-2 mx-auto mt-4 text-xs text-center max-w-max text-begonia-sec-gray">
+      Política de privacidad
+    </nuxt-link>
   </div>
 </template>
 
