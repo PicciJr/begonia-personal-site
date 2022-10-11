@@ -1,17 +1,18 @@
 <template>
   <div>
+    <span class="text-xs text-gray-400"
+      >Dirección de entrega (Calle, puerta, número)</span
+    >
     <a-input-text-field
       v-model="street"
-      placeholder="Dirección de entrega: calle, número"
       :class="[
         'w-full',
         {
           'border-red-400 ring-red-400 ring-1 bg-red-100 bg-opacity-60':
-            errorMessage !== null,
-        },
+            errorMessage !== null
+        }
       ]"
-      @change="validateStreet"
-    />
+      @change="validateStreet" />
     <!-- Error label -->
     <p v-show="errorMessage" class="text-xs font-medium text-red-400">
       {{ errorMessage }}
@@ -28,23 +29,23 @@ export default {
   components: {
     AInputTextField
   },
-  data () {
+  data() {
     return {
       errorMessage: null
     }
   },
   computed: {
     ...mapState({
-      street: state => cartStore.shippingAddress.street
+      street: (state) => cartStore.shippingAddress.street
     })
   },
-  created () {
+  created() {
     if (this.isValidLength(this.street)) {
       this.$emit('valid-street')
     }
   },
   methods: {
-    validateStreet (event) {
+    validateStreet(event) {
       cartStore.updateStreet(event.target.value)
       if (this.isValidLength(event.target.value)) {
         this.$emit('valid-street')
@@ -54,7 +55,7 @@ export default {
         this.errorMessage = 'Por favor, introduzca una dirección válida.'
       }
     },
-    isValidLength (street) {
+    isValidLength(street) {
       return street.length > 3
     }
   }

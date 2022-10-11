@@ -1,33 +1,28 @@
 <template>
   <div>
-    <p class="mb-4 text-xl">
-      Tus datos de envío
-    </p>
+    <p class="mb-4 text-xl">Tus datos de envío</p>
     <form class="flex flex-col">
       <m-street-address-input
         class="mb-3"
         @valid-street="handleValidStreet"
-        @invalid-street="handleInvalidStreet"
-      />
+        @invalid-street="handleInvalidStreet" />
       <m-city-input
         class="mb-3"
         @valid-city="handleValidCity"
-        @invalid-city="handleInvalidCity"
-      />
-      <m-postal-code-input
-        class="mb-3"
-        @valid-postal="handleValidPostalCode"
-        @invalid-postal="handleInvalidPostalCode"
-      />
-      <m-phone-number-input
-        class="mb-3"
-        @valid-phone="handleValidPhoneNumber"
-        @invalid-phone="handleInvalidPhoneNumber"
-      />
+        @invalid-city="handleInvalidCity" />
+      <div class="flex justify-between space-x-3">
+        <m-postal-code-input
+          class="mb-3"
+          @valid-postal="handleValidPostalCode"
+          @invalid-postal="handleInvalidPostalCode" />
+        <m-phone-number-input
+          class="mb-3"
+          @valid-phone="handleValidPhoneNumber"
+          @invalid-phone="handleInvalidPhoneNumber" />
+      </div>
       <m-email-input
         @valid-email="handleValidEmail"
-        @invalid-email="handleInvalidEmail"
-      />
+        @invalid-email="handleInvalidEmail" />
     </form>
   </div>
 </template>
@@ -47,7 +42,7 @@ export default Vue.extend({
     MPostalCodeInput,
     MEmailInput
   },
-  data () {
+  data() {
     return {
       isValidStreet: false,
       isValidProvince: false,
@@ -57,47 +52,47 @@ export default Vue.extend({
     }
   },
   methods: {
-    handleValidStreet () {
+    handleValidStreet() {
       this.isValidStreet = true
       this.sendValidityStatus()
     },
-    handleInvalidStreet () {
+    handleInvalidStreet() {
       this.isValidStreet = false
       this.sendValidityStatus()
     },
-    handleValidCity () {
+    handleValidCity() {
       this.isValidProvince = true
       this.sendValidityStatus()
     },
-    handleInvalidCity () {
+    handleInvalidCity() {
       this.isValidProvince = false
       this.sendValidityStatus()
     },
-    handleValidPostalCode () {
+    handleValidPostalCode() {
       this.isValidPostalCode = true
       this.sendValidityStatus()
     },
-    handleInvalidPostalCode () {
+    handleInvalidPostalCode() {
       this.isValidPostalCode = false
       this.sendValidityStatus()
     },
-    handleValidPhoneNumber () {
+    handleValidPhoneNumber() {
       this.isValidPhoneNumber = true
       this.sendValidityStatus()
     },
-    handleInvalidPhoneNumber () {
+    handleInvalidPhoneNumber() {
       this.isValidPhoneNumber = false
       this.sendValidityStatus()
     },
-    handleValidEmail () {
+    handleValidEmail() {
       this.isValidEmail = true
       this.sendValidityStatus()
     },
-    handleInvalidEmail () {
+    handleInvalidEmail() {
       this.isValidEmail = false
       this.sendValidityStatus()
     },
-    sendValidityStatus () {
+    sendValidityStatus() {
       if (
         this.isValidEmail &&
         this.isValidPhoneNumber &&

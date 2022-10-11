@@ -1,23 +1,18 @@
 <template>
   <form class="space-y-6" @submit="$event.preventDefault()">
     <div class="space-y-1">
+      <span class="text-xs text-gray-400">Correo electrónico</span>
       <a-input-text-field
         v-model="email"
         class="w-full"
-        placeholder="Correo electrónico"
-        @change="updateEmail"
-      />
+        @change="updateEmail" />
       <p v-if="errorMessage.email" class="text-xs text-red-500">
         {{ errorMessage.email }}
       </p>
     </div>
     <div class="space-y-1">
-      <a-input-text-field
-        v-model="name"
-        class="w-full"
-        placeholder="Tu nombre"
-        @change="updateName"
-      />
+      <span class="text-xs text-gray-400">Tu Nombre</span>
+      <a-input-text-field v-model="name" class="w-full" @change="updateName" />
       <p v-if="errorMessage.name" class="text-xs text-red-500">
         {{ errorMessage.name }}
       </p>
@@ -27,14 +22,12 @@
       v-model="comment"
       name=""
       cols="30"
-      class="w-full text-sm rounded-md border-begonia-primary-gray"
-      :placeholder="commentPlaceholderText"
-    />
+      class="w-full text-sm text-gray-500 placeholder-current rounded-md border-begonia-primary-gray"
+      :placeholder="commentPlaceholderText" />
     <a-button
       :cta-text="ctaText"
       class="w-full px-4 py-1 text-lg bg-begonia-primary-purple hover:bg-purple-200"
-      @click="checkFormValidity"
-    />
+      @click="checkFormValidity" />
   </form>
 </template>
 
@@ -57,7 +50,7 @@ export default Vue.extend({
       default: 'Quiero más información'
     }
   },
-  data () {
+  data() {
     return {
       name: null,
       email: null,
@@ -69,7 +62,7 @@ export default Vue.extend({
     }
   },
   methods: {
-    checkFormValidity () {
+    checkFormValidity() {
       if (this.isValidEmail() && this.isValidName()) {
         this.$emit('form-ok', {
           email: this.email,
@@ -78,13 +71,13 @@ export default Vue.extend({
         })
       }
     },
-    updateEmail (event) {
+    updateEmail(event) {
       this.email = event.target.value
     },
-    updateName (event) {
+    updateName(event) {
       this.name = event.target.value
     },
-    isValidEmail () {
+    isValidEmail() {
       if (!this.email) {
         this.errorMessage.email =
           'Por favor, indica un email al que podamos contactarte'
@@ -97,7 +90,7 @@ export default Vue.extend({
         return true
       }
     },
-    isValidName () {
+    isValidName() {
       if (!this.name) {
         this.errorMessage.name = 'Por favor, indícame tu nombre'
         return false
@@ -106,7 +99,7 @@ export default Vue.extend({
         return true
       }
     },
-    isValidPattern (email) {
+    isValidPattern(email) {
       return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
         email
       )

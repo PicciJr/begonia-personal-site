@@ -1,18 +1,17 @@
 <template>
   <div>
+    <span class="text-xs text-gray-400">Correo electrónico</span>
     <a-input-text-field
       v-model="email"
-      placeholder="Correo electrónico"
       :class="[
         'w-full',
         {
           'border-red-400 ring-red-400 ring-1 bg-red-100 bg-opacity-60':
-            errorMessage !== null,
-        },
+            errorMessage !== null
+        }
       ]"
       type="email"
-      @change="validateEmail"
-    />
+      @change="validateEmail" />
     <!-- Error label -->
     <p v-show="errorMessage" class="text-xs font-medium text-red-400">
       {{ errorMessage }}
@@ -29,23 +28,23 @@ export default {
   components: {
     AInputTextField
   },
-  data () {
+  data() {
     return {
       errorMessage: null
     }
   },
   computed: {
     ...mapState({
-      email: state => cartStore.shippingAddress.email
+      email: (state) => cartStore.shippingAddress.email
     })
   },
-  created () {
+  created() {
     if (this.isValidLength(this.email) && this.isValidPattern(this.email)) {
       this.$emit('valid-email')
     }
   },
   methods: {
-    validateEmail (event) {
+    validateEmail(event) {
       cartStore.updateEmail(event.target.value)
       if (
         this.isValidLength(event.target.value) &&
@@ -58,10 +57,10 @@ export default {
         this.errorMessage = 'Por favor, introduzca un email válido.'
       }
     },
-    isValidLength (email) {
+    isValidLength(email) {
       return email.length > 5
     },
-    isValidPattern (email) {
+    isValidPattern(email) {
       return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
         email
       )

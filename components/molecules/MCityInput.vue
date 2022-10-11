@@ -1,5 +1,6 @@
 <template>
   <div>
+    <span class="text-xs text-gray-400">Provincia</span>
     <a-dropdown-field
       v-model="selectedOption"
       :selected-option="selectedOption"
@@ -8,11 +9,10 @@
         'w-full',
         {
           'border-red-400 ring-red-400 ring-1 bg-red-100 bg-opacity-60':
-            errorMessage !== null,
-        },
+            errorMessage !== null
+        }
       ]"
-      @change="validateCity"
-    />
+      @change="validateCity" />
     <!-- Error label -->
     <p v-show="errorMessage" class="text-xs font-medium text-red-400">
       {{ errorMessage }}
@@ -29,7 +29,7 @@ export default {
   components: {
     ADropdownField
   },
-  data () {
+  data() {
     return {
       errorMessage: null,
       allowedCities: null
@@ -38,10 +38,10 @@ export default {
   },
   computed: {
     ...mapState({
-      selectedOption: state => cartStore.shippingAddress.province
+      selectedOption: (state) => cartStore.shippingAddress.province
     })
   },
-  created () {
+  created() {
     this.allowedCities = this.getAllowedCities()
     if (this.isValidCitySelected(this.selectedOption)) {
       this.$emit('valid-city')
@@ -50,7 +50,7 @@ export default {
     }
   },
   methods: {
-    validateCity (event) {
+    validateCity(event) {
       cartStore.updateProvince(event.target.value)
       if (this.isValidCitySelected(event.target.value)) {
         this.$emit('valid-city')
@@ -60,12 +60,12 @@ export default {
         this.errorMessage = 'Por favor, seleccione una provincia.'
       }
     },
-    isValidCitySelected (citySelected) {
+    isValidCitySelected(citySelected) {
       return this.allowedCities.indexOf(citySelected) !== 0
     },
-    getAllowedCities () {
+    getAllowedCities() {
       return [
-        '-- Provincia --',
+        '-- Selecciona provincia --',
         'Alava',
         'Albacete',
         'Alicante',

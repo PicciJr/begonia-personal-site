@@ -18,27 +18,27 @@ export default class Cart extends VuexModule {
     email: '',
     phoneNumber: '',
     postalCode: '',
-    province: '-- Provincia --',
+    province: '-- Selecciona provincia --',
     street: ''
   }
 
   @Mutation
-  SET_CART (cart: ICart) {
+  SET_CART(cart: ICart) {
     this.cart = cart
   }
 
   @Mutation
-  SET_SHIPPING_ADDRESS (shippingAddress: IAddress) {
+  SET_SHIPPING_ADDRESS(shippingAddress: IAddress) {
     this.shippingAddress = shippingAddress
   }
 
   @Mutation
-  SET_CART_TOKEN (token) {
+  SET_CART_TOKEN(token) {
     this.cart.token = token
   }
 
   @Mutation
-  RESET_CART () {
+  RESET_CART() {
     this.cart = {
       items: [],
       subtotal: 0.0
@@ -46,37 +46,37 @@ export default class Cart extends VuexModule {
   }
 
   @Mutation
-  UPDATE_EMAIL (email) {
+  UPDATE_EMAIL(email) {
     this.shippingAddress.email = email
   }
 
   @Mutation
-  UPDATE_STREET (street) {
+  UPDATE_STREET(street) {
     this.shippingAddress.street = street
   }
 
   @Mutation
-  UPDATE_PROVINCE (province) {
+  UPDATE_PROVINCE(province) {
     this.shippingAddress.province = province
   }
 
   @Mutation
-  UPDATE_POSTALCODE (postalCode) {
+  UPDATE_POSTALCODE(postalCode) {
     this.shippingAddress.postalCode = postalCode
   }
 
   @Mutation
-  UPDATE_PHONENUMBER (phoneNumber) {
+  UPDATE_PHONENUMBER(phoneNumber) {
     this.shippingAddress.phoneNumber = phoneNumber
   }
 
   @Mutation
-  SET_CART_STATUS (status) {
+  SET_CART_STATUS(status) {
     this.cart.status = status
   }
 
   @Action
-  async createCart ({ productId, variantId = null, options = null, quantity }) {
+  async createCart({ productId, variantId = null, options = null, quantity }) {
     try {
       const newCart = await this.store.$apiConnection.post('cart', {
         productId,
@@ -96,12 +96,12 @@ export default class Cart extends VuexModule {
   }
 
   @Action
-  setCartToken (token) {
+  setCartToken(token) {
     this.SET_CART_TOKEN(token)
   }
 
   @Action
-  async getCart () {
+  async getCart() {
     const response = await this.store.$apiConnection.get(
       `cart/${this.cart.token}`
     )
@@ -112,7 +112,7 @@ export default class Cart extends VuexModule {
   }
 
   @Action
-  async addCartItem ({ productId, variantId = null, options = null, quantity }) {
+  async addCartItem({ productId, variantId = null, options = null, quantity }) {
     try {
       const updatedCart = await this.store.$apiConnection.post(
         `cart/${this.cart.token}/${productId}`,
@@ -123,7 +123,7 @@ export default class Cart extends VuexModule {
   }
 
   @Action
-  async updateCartItem ({ product, variantId = null, quantity }) {
+  async updateCartItem({ product, variantId = null, quantity }) {
     try {
       const updatedCart = await this.store.$apiConnection.put(
         `cart/${this.cart.token}/${product.id}`,
@@ -134,7 +134,7 @@ export default class Cart extends VuexModule {
   }
 
   @Action
-  async removeCartItem ({ product, variantId = null }) {
+  async removeCartItem({ product, variantId = null }) {
     // NuxtJS@axios does NOT work with "delete" if used with BODY payload
     try {
       const updatedCart = await this.store.$apiConnection.request(
@@ -152,7 +152,7 @@ export default class Cart extends VuexModule {
   }
 
   @Action
-  async setCartAddress () {
+  async setCartAddress() {
     try {
       const updatedCart = await this.store.$apiConnection.put(
         `cart/${this.cart.token}/address`,
@@ -165,7 +165,7 @@ export default class Cart extends VuexModule {
   }
 
   @Action
-  async completeOrder () {
+  async completeOrder() {
     try {
       const response = await this.store.$apiConnection.put(
         `cart/checkout/complete/${this.cart.token}`
@@ -178,54 +178,54 @@ export default class Cart extends VuexModule {
   }
 
   @Action
-  resetCartToInitialStatus () {
+  resetCartToInitialStatus() {
     this.RESET_CART()
     this.store.$cookies.remove('cartToken')
   }
 
   @Action
-  updateEmail (email) {
+  updateEmail(email) {
     this.UPDATE_EMAIL(email)
   }
 
   @Action
-  updateStreet (street) {
+  updateStreet(street) {
     this.UPDATE_STREET(street)
   }
 
   @Action
-  updateProvince (province) {
+  updateProvince(province) {
     this.UPDATE_PROVINCE(province)
   }
 
   @Action
-  updatePostalCode (postalCode) {
+  updatePostalCode(postalCode) {
     this.UPDATE_POSTALCODE(postalCode)
   }
 
   @Action
-  updatePhoneNumber (phoneNumber) {
+  updatePhoneNumber(phoneNumber) {
     this.UPDATE_PHONENUMBER(phoneNumber)
   }
 
   @Action
-  updateCartStatus (status) {
+  updateCartStatus(status) {
     this.SET_CART_STATUS(status)
   }
 
-  get cartItemsTotalAmount () {
+  get cartItemsTotalAmount() {
     return this.cart.items.reduce((acc, item) => {
       return acc + item.amount
     }, 0)
   }
 
-  get productInCart () {
+  get productInCart() {
     return (productId) => {
-      return this.cart?.items?.find(product => product.id === productId)
+      return this.cart?.items?.find((product) => product.id === productId)
     }
   }
 
-  get productVariantInCart () {
+  get productVariantInCart() {
     return (variantId) => {
       return (
         this.cart.items.find(

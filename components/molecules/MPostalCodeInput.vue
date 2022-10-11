@@ -1,19 +1,18 @@
 <template>
   <div>
+    <span class="text-xs text-gray-400">Código Postal</span>
     <a-input-text-field
       v-model="postalCode"
       v-mask="'#####'"
-      placeholder="Código Postal"
       :class="[
         'w-full',
         {
           'border-red-400 ring-red-400 ring-1 bg-red-100 bg-opacity-60':
-            errorMessage !== null,
-        },
+            errorMessage !== null
+        }
       ]"
       @keydown="preventInvalidChars"
-      @change="validatePostalCode"
-    />
+      @change="validatePostalCode" />
     <!-- Error label -->
     <p v-show="errorMessage" class="text-xs font-medium text-red-400">
       {{ errorMessage }}
@@ -30,23 +29,23 @@ export default {
   components: {
     AInputTextField
   },
-  data () {
+  data() {
     return {
       errorMessage: null
     }
   },
   computed: {
     ...mapState({
-      postalCode: state => cartStore.shippingAddress.postalCode
+      postalCode: (state) => cartStore.shippingAddress.postalCode
     })
   },
-  created () {
+  created() {
     if (this.isValidLength(this.postalCode)) {
       this.$emit('valid-postal')
     }
   },
   methods: {
-    validatePostalCode (event) {
+    validatePostalCode(event) {
       cartStore.updatePostalCode(event.target.value)
       if (this.isValidLength(event.target.value)) {
         this.$emit('valid-postal')
@@ -56,14 +55,19 @@ export default {
         this.errorMessage = 'Por favor, introduzca un código postal válido'
       }
     },
-    preventInvalidChars (event) {
+    preventInvalidChars(event) {
       // keycode = 9 to allow tab index
       // keycode = 8, 46 to allow deletions
-      if ((event.which < 48 || event.which > 57) && event.which !== 9 && event.which !== 8 && event.which !== 46) {
+      if (
+        (event.which < 48 || event.which > 57) &&
+        event.which !== 9 &&
+        event.which !== 8 &&
+        event.which !== 46
+      ) {
         event.preventDefault()
       }
     },
-    isValidLength (postalCode) {
+    isValidLength(postalCode) {
       return postalCode.length >= 4 && postalCode.length <= 5
     }
   }
