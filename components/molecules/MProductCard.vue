@@ -2,36 +2,28 @@
 <template>
   <nuxt-link
     :to="`/producto/${product.slug}`"
-    class="relative flex items-end justify-center w-64 h-56 py-3 rounded-md shadow-xl md:w-56 md:h-64 hover:shadow-2xl"
-  >
+    class="flex flex-col justify-center max-w-sm py-3 space-y-4 md:w-56">
     <img
       :src="product.images[0].url"
       alt=""
-      class="absolute top-0 rounded-md shadow-md max-h-40 left-1/2 productCardImage"
-      loading="lazy"
-    >
+      class="rounded-md md:h-80 md:object-cover"
+      loading="lazy" />
     <div class="flex flex-col items-center px-8 space-y-1 text-center">
-      <h3 class="text-base font-medium">
+      <h3 class="text-lg font-medium">
         {{ product.title }}
       </h3>
       <!-- Precio -->
-      <div
-        v-if="hasRangeInPricing"
-        class="mb-2 font-bold text-md md:text-lg"
-      >
+      <div v-if="hasRangeInPricing" class="mb-2 font-bold text-md md:text-lg">
         {{ product.minPrice | formatToEuroCurrency }}
         <span class="px-1 text-xs font-medium">-</span>
         {{ product.maxPrice | formatToEuroCurrency }}
       </div>
-      <span
-        v-else
-        class="mb-2 font-bold text-md md:text-lg"
-      ><span v-if="hasMultipleVariants" class="text-xs font-medium">desde</span> {{ productLowestPrice | formatToEuroCurrency }}</span>
-      <a-button
-        class="px-2 py-1 text-sm font-bold uppercase rounded-md text-begonia-sec-gray bg-begonia-primary-purple hover:bg-purple-200"
+      <span v-else class="mb-2 font-bold text-md md:text-lg"
+        ><span v-if="hasMultipleVariants" class="text-xs font-medium"
+          >desde</span
+        >
+        {{ productLowestPrice | formatToEuroCurrency }}</span
       >
-        Ver producto
-      </a-button>
     </div>
   </nuxt-link>
 </template>
@@ -55,37 +47,25 @@ export default Vue.extend({
   },
   computed: {
     ...mapState({
-      cart: state => cartStore.cart
+      cart: (state) => cartStore.cart
     }),
-    isEmtpyCart () {
+    isEmtpyCart() {
       return this.cart.items.length <= 0
     },
-    hasVariants () {
+    hasVariants() {
       return this.product.variants.length > 0
     },
-    hasMultipleVariants () {
+    hasMultipleVariants() {
       return this.product.variants.length > 1
     },
-    productLowestPrice () {
+    productLowestPrice() {
       return this.hasVariants
         ? Math.min(...this.product.variants.map(({ price }) => price))
         : this.product.price
     },
-    hasRangeInPricing () {
+    hasRangeInPricing() {
       return this.product.minPrice !== null && this.product.maxPrice !== null
     }
   }
 })
 </script>
-
-<style scoped>
-.productCardImage {
-  transform: translate(-50%, -50%);
-}
-
-@screen md {
-  .productCardImage {
-    transform: translate(-50%, -35%);
-  }
-}
-</style>

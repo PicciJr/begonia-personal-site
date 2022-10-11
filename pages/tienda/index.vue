@@ -1,13 +1,11 @@
 <template>
   <div
-    class="flex flex-wrap justify-center px-4 mt-40 mb-8 md:mt-16 text-begonia-sec-gray"
-  >
+    class="flex flex-wrap justify-center px-4 mt-12 mb-8 md:mt-16 text-begonia-sec-gray md:items-start">
     <m-product-card
       v-for="product in products"
       :key="product.id"
       :product="product"
-      class="mx-0 mb-32 md:mx-2"
-    />
+      class="mx-0 mb-8 md:mx-2" />
   </div>
 </template>
 
@@ -19,7 +17,7 @@ export default {
     MProductCard
   },
   layout: 'default',
-  async asyncData ({ app }) {
+  async asyncData({ app }) {
     try {
       const response = await app.$apiConnection.get('/product/tienda/all')
       return {

@@ -6,8 +6,7 @@
       :product="product"
       class="mb-4"
       :autoplay="3000"
-      :hoverpause="true"
-    />
+      :hoverpause="true" />
     <!-- Title -->
     <h3 class="mb-4 text-2xl font-bold md:text-4xl">
       {{ product.title }}
@@ -16,39 +15,34 @@
     <o-product-add-to-cart
       v-if="isBuyableProduct"
       :product="product"
-      class="mb-4"
-    />
+      class="w-full mb-4" />
     <!-- Price & Send to form -->
     <div v-else class="flex flex-col justify-center">
-      <a-price-range
-        v-if="hasRangeInPricing"
-        :product="product"
-        class="mb-2"
-      />
+      <a-price-range v-if="hasRangeInPricing" :product="product" class="mb-2" />
       <a-button
         cta-text="Me interesa"
-        class="w-64 px-4 py-1 mb-4 text-lg uppercase bg-begonia-primary-purple hover:bg-purple-200"
-        @click="$router.push(`/contacto-encargo/${product.slug}`)"
-      />
+        class="w-full px-4 py-1 mb-4 text-lg uppercase bg-begonia-primary-purple hover:bg-purple-200"
+        @click="$router.push(`/contacto-encargo/${product.slug}`)" />
     </div>
     <!-- Product description -->
     <div class="mb-16">
-      <h3 class="mb-4 text-xl font-bold md:text-3xl">
-        Descripción
-      </h3>
+      <h3 class="mb-4 text-xl font-bold md:text-3xl">Descripción</h3>
       <div
-        :class="['px-2', longDescriptionBehaviour]"
-        v-html="$md.render(product.longDescription)"
-      />
+        :class="['px-2 leading-7', longDescriptionBehaviour]"
+        v-html="$md.render(product.longDescription)" />
       <div v-if="isDescriptionVeryLong" class="flex justify-center">
         <span
           class="px-4 py-1 text-sm font-bold text-white rounded-full cursor-pointer w-max bg-begonia-sec-gray"
           @click="toggleLongDescriptionVisibility"
-        >{{ longDescriptionBadgeText }}</span>
+          >{{ longDescriptionBadgeText }}</span
+        >
       </div>
     </div>
     <!-- Related products -->
-    <o-similar-products v-if="hasRelatedProducts" class="mt-8" :similar-products="relatedProducts" />
+    <o-similar-products
+      v-if="hasRelatedProducts"
+      class="mt-8"
+      :similar-products="relatedProducts" />
     <!-- Sticky footer Add to cart -->
     <!-- TODO: que el sticky footer importe la logica del oproductaddtocart para no duplicar -->
     <!-- <m-cart-sticky-footer
@@ -78,7 +72,7 @@ export default Vue.extend({
     OSimilarProducts
   },
   layout: 'default',
-  async asyncData ({ app, route }) {
+  async asyncData({ app, route }) {
     try {
       const productSlug = route.params.slug
       const response = await app.$apiConnection.get(
@@ -102,36 +96,36 @@ export default Vue.extend({
       app.$bugsnag.notify(new Error('Error ficha producto', err))
     }
   },
-  data () {
+  data() {
     return {
       isLongDescriptionVisible: false
     }
   },
   computed: {
-    longDescriptionBehaviour (): string {
+    longDescriptionBehaviour(): string {
       return !this.isDescriptionVeryLong ||
         (this.isDescriptionVeryLong && this.isLongDescriptionVisible)
         ? 'h-full'
         : 'h-20 overflow-hidden'
     },
-    longDescriptionBadgeText (): string {
+    longDescriptionBadgeText(): string {
       return this.isLongDescriptionVisible ? 'Leer menos' : 'Leer más'
     },
-    isBuyableProduct () {
+    isBuyableProduct() {
       return this.product.type !== 'Encargo'
     },
-    isDescriptionVeryLong () {
+    isDescriptionVeryLong() {
       return this.product.longDescription.length > 500
     },
-    hasRelatedProducts () {
+    hasRelatedProducts() {
       return this.relatedProducts.length > 0
     },
-    hasRangeInPricing () {
+    hasRangeInPricing() {
       return this.product.minPrice !== null && this.product.maxPrice !== null
     }
   },
   methods: {
-    toggleLongDescriptionVisibility () {
+    toggleLongDescriptionVisibility() {
       this.isLongDescriptionVisible = !this.isLongDescriptionVisible
     }
   }
