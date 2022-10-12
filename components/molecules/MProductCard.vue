@@ -5,8 +5,8 @@
     class="flex flex-col justify-center max-w-sm py-3 space-y-4 md:w-56">
     <img
       :src="product.images[0].url"
-      alt=""
-      class="rounded-md md:h-80 md:object-cover"
+      :alt="`Begoña Quereda Ilustraciones - ${product.title}`"
+      class="md:h-80 md:object-cover"
       loading="lazy" />
     <div class="flex flex-col items-center px-8 space-y-1 text-center">
       <h3 class="text-lg font-medium">

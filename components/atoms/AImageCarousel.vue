@@ -3,10 +3,11 @@
     v-model="activeSlide"
     :breakpoints="breakpoints"
     :hoverpause="hoverpause"
-    :autoplay="autoplay"
-  >
+    :autoplay="autoplay">
     <vue-glide-slide v-for="image in product.images" :key="image.id">
-      <img :src="imageSourceResolver(image)" alt="" class="rounded-lg">
+      <img
+        :src="imageSourceResolver(image)"
+        :alt="`Begoña Quereda Ilustraciones - ${product.title}`" />
     </vue-glide-slide>
     <template slot="control">
       <div class="relative w-full pt-2 text-center">
@@ -16,8 +17,7 @@
             :key="index"
             class="w-2 h-2 ml-px mr-1 bg-gray-400 rounded-full"
             :class="{ 'bg-begonia-primary-orange': index === activeSlide }"
-            @click="productActive = index"
-          />
+            @click="productActive = index" />
         </div>
       </div>
     </template>
@@ -34,7 +34,7 @@ export default Vue.extend({
     },
     breakpoints: {
       type: Object,
-      default () {
+      default() {
         return {
           800: {
             perView: 1
@@ -51,13 +51,13 @@ export default Vue.extend({
       default: false
     }
   },
-  data () {
+  data() {
     return {
       activeSlide: -1
     }
   },
   methods: {
-    imageSourceResolver (image) {
+    imageSourceResolver(image) {
       return image.formats?.medium?.url || image.formats?.small?.url
     }
   }
