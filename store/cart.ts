@@ -15,6 +15,7 @@ export default class Cart extends VuexModule {
   }
 
   shippingAddress: IAddress = {
+    name: '',
     email: '',
     phoneNumber: '',
     postalCode: '',
@@ -68,6 +69,11 @@ export default class Cart extends VuexModule {
   @Mutation
   UPDATE_PHONENUMBER(phoneNumber) {
     this.shippingAddress.phoneNumber = phoneNumber
+  }
+
+  @Mutation
+  UPDATE_PERSONNAME(name) {
+    this.shippingAddress.name = name
   }
 
   @Mutation
@@ -206,6 +212,11 @@ export default class Cart extends VuexModule {
   @Action
   updatePhoneNumber(phoneNumber) {
     this.UPDATE_PHONENUMBER(phoneNumber)
+  }
+
+  @Action
+  updatePersonName(name) {
+    this.UPDATE_PERSONNAME(name)
   }
 
   @Action

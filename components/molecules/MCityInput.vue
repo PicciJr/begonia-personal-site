@@ -26,6 +26,7 @@ import { cartStore } from '@/store'
 import ADropdownField from '~/components/atoms/ADropdownField.vue'
 
 export default {
+  name: 'MCityInput',
   components: {
     ADropdownField
   },

@@ -25,6 +25,7 @@ import { cartStore } from '@/store'
 import AInputTextField from '~/components/atoms/AInputTextField.vue'
 
 export default {
+  name: 'MEmailInput',
   components: {
     AInputTextField
   },

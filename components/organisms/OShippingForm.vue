@@ -2,6 +2,10 @@
   <div>
     <p class="mb-4 text-xl">Tus datos de envío</p>
     <form class="flex flex-col">
+      <m-person-name-input
+        class="mb-3"
+        @valid-name="handleValidName"
+        @invalid-name="handleInvalidName" />
       <m-street-address-input
         class="mb-3"
         @valid-street="handleValidStreet"
@@ -34,13 +38,15 @@ import MStreetAddressInput from '~/components/molecules/MStreetAddressInput.vue'
 import MCityInput from '~/components/molecules/MCityInput.vue'
 import MPostalCodeInput from '~/components/molecules/MPostalCodeInput.vue'
 import MEmailInput from '~/components/molecules/MEmailInput.vue'
+import MPersonNameInput from '~/components/molecules/MPersonNameInput.vue'
 export default Vue.extend({
   components: {
     MStreetAddressInput,
     MCityInput,
     MPhoneNumberInput,
     MPostalCodeInput,
-    MEmailInput
+    MEmailInput,
+    MPersonNameInput
   },
   data() {
     return {
@@ -48,7 +54,8 @@ export default Vue.extend({
       isValidProvince: false,
       isValidPostalCode: false,
       isValidPhoneNumber: false,
-      isValidEmail: false
+      isValidEmail: false,
+      isValidName: false
     }
   },
   methods: {
@@ -92,13 +99,22 @@ export default Vue.extend({
       this.isValidEmail = false
       this.sendValidityStatus()
     },
+    handleValidName() {
+      this.isValidName = true
+      this.sendValidityStatus()
+    },
+    handleInvalidName() {
+      this.isValidName = false
+      this.sendValidityStatus()
+    },
     sendValidityStatus() {
       if (
         this.isValidEmail &&
         this.isValidPhoneNumber &&
         this.isValidPostalCode &&
         this.isValidProvince &&
-        this.isValidStreet
+        this.isValidStreet &&
+        this.isValidName
       ) {
         this.$emit('valid-form')
       } else {

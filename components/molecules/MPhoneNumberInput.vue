@@ -25,6 +25,7 @@ import AInputTextField from '../atoms/AInputTextField.vue'
 import { cartStore } from '@/store'
 
 export default {
+  name: 'MPhoneNumberInput',
   components: {
     AInputTextField
   },

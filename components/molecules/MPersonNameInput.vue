@@ -1,10 +1,8 @@
 <template>
   <div>
-    <span class="text-xs text-gray-400"
-      >Dirección de entrega (Calle, puerta, número)</span
-    >
+    <span class="text-xs text-gray-400">Nombre y apellidos</span>
     <a-input-text-field
-      v-model="street"
+      v-model="name"
       :class="[
         'w-full',
         {
@@ -12,7 +10,7 @@
             errorMessage !== null
         }
       ]"
-      @change="validateStreet" />
+      @change="validateName" />
     <!-- Error label -->
     <p v-show="errorMessage" class="text-xs font-medium text-red-400">
       {{ errorMessage }}
@@ -26,7 +24,7 @@ import { cartStore } from '@/store'
 import AInputTextField from '~/components/atoms/AInputTextField.vue'
 
 export default {
-  name: 'MStreetAddressInput',
+  name: 'MPersonNameInput',
   components: {
     AInputTextField
   },
@@ -37,27 +35,27 @@ export default {
   },
   computed: {
     ...mapState({
-      street: (state) => cartStore.shippingAddress.street
-    })
+      name: (state) => cartStore.shippingAddress.name
+    }),
+    isValidName() {
+      return this.name.length > 3
+    }
   },
   created() {
-    if (this.isValidLength(this.street)) {
-      this.$emit('valid-street')
+    if (this.isValidName) {
+      this.$emit('valid-name')
     }
   },
   methods: {
-    validateStreet(event) {
-      cartStore.updateStreet(event.target.value)
-      if (this.isValidLength(event.target.value)) {
-        this.$emit('valid-street')
+    validateName(event) {
+      cartStore.updatePersonName(event.target.value.trim())
+      if (this.isValidName) {
+        this.$emit('valid-name')
         this.errorMessage = null
       } else {
-        this.$emit('invalid-street')
-        this.errorMessage = 'Por favor, introduzca una dirección válida.'
+        this.$emit('invalid-name')
+        this.errorMessage = 'Por favor, introduce tu nombre'
       }
-    },
-    isValidLength(street) {
-      return street.length > 3
     }
   }
 }

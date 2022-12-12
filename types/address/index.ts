@@ -1,4 +1,3 @@
-
 /**
  * items: items del carrito
  * subtotal: subtotal actual del carrito
@@ -6,9 +5,10 @@
  * phoneNumber: teléfono de contacto
  */
 export interface IAddress {
-    street: string
-    province: string
-    postalCode: string
-    phoneNumber: string
-    email: string
+  name: string
+  street: string
+  province: string
+  postalCode: string
+  phoneNumber: string
+  email: string
 }
