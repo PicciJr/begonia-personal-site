@@ -85,6 +85,7 @@ export default {
   // runtime eslinting (https://typescript.nuxtjs.org/guide/lint#runtime-lint)
   typescript: {
     typeCheck: false
+    // TODO: esta config hace que los builds en Vercel fallen
     // typeCheck: {
     //   eslint: {
     //     files: './**/*.{ts,js,vue}'
