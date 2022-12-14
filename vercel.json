@@ -1,4 +1,4 @@
 {
   "version": 2,
-  "installCommand": "yarn install --production"
+  "installCommand": "yarn install --ignore-engines"
 }
