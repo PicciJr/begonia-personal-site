@@ -13,7 +13,7 @@
         :src="imageSourceResolver(image)"
         :alt="`Begoña Quereda Ilustraciones - ${product.title}`" />
     </vue-glide-slide>
-    <template slot="control">
+    <template slot="control" v-if="product.images.length > 1">
       <button
         v-for="(item, index) in product.images"
         :key="index"
