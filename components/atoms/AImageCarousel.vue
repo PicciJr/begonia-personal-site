@@ -2,24 +2,24 @@
   <vue-glide
     v-model="activeSlide"
     :breakpoints="breakpoints"
+    :perView="perView"
     :hoverpause="hoverpause"
     :autoplay="autoplay">
-    <vue-glide-slide v-for="image in product.images" :key="image.id">
+    <vue-glide-slide
+      v-for="(image, index) in product.images"
+      :key="index"
+      class="my-auto">
       <img
         :src="imageSourceResolver(image)"
         :alt="`Begoña Quereda Ilustraciones - ${product.title}`" />
     </vue-glide-slide>
     <template slot="control">
-      <div class="relative w-full pt-2 text-center">
-        <div class="inline-block px-3 py-1 bg-white rounded-full">
-          <button
-            v-for="(item, index) in product.images"
-            :key="index"
-            class="w-2 h-2 ml-px mr-1 bg-gray-400 rounded-full"
-            :class="{ 'bg-begonia-primary-orange': index === activeSlide }"
-            @click="productActive = index" />
-        </div>
-      </div>
+      <button
+        v-for="(item, index) in product.images"
+        :key="index"
+        class="w-2 h-2 mx-2 mt-3 bg-gray-400 rounded-full"
+        :class="{ 'bg-begonia-primary-orange': index === activeSlide }"
+        :data-glide-dir="'=' + index" />
     </template>
   </vue-glide>
 </template>
@@ -42,6 +42,10 @@ export default Vue.extend({
         }
       }
     },
+    perView: {
+      type: Number,
+      default: 1
+    },
     autoplay: {
       type: [Number, Boolean],
       default: false
@@ -53,12 +57,25 @@ export default Vue.extend({
   },
   data() {
     return {
-      activeSlide: -1
+      activeSlide: 0
     }
+  },
+  mounted() {
+    this.updateControlsDisplay()
   },
   methods: {
     imageSourceResolver(image) {
       return image.formats?.medium?.url || image.formats?.small?.url
+    },
+    updateControlsDisplay() {
+      // Por css no funciona, con ningun selector no llega a responder
+      const carouselControls = document.querySelector(
+        "[data-glide-el='controls']"
+      )
+      if (carouselControls) {
+        carouselControls.style.display = 'flex'
+        carouselControls.style.justifyContent = 'center'
+      }
     }
   }
 })

@@ -5,7 +5,7 @@
       :images="product.images"
       :product="product"
       class="mb-4"
-      :autoplay="3000"
+      :autoplay="false"
       :hoverpause="true" />
     <!-- Title -->
     <h3 class="mb-4 text-2xl font-bold md:text-4xl">
